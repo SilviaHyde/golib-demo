@@ -1,0 +1,3168 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    149772,       3160]
+NotebookOptionsPosition[    138564,       2970]
+NotebookOutlinePosition[    139741,       3006]
+CellTagsIndexPosition[    139625,       3000]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}]], "InitializationCell",
+ CellLabel->
+  "5/13/20 00:35:23 \
+In[3]:=",ExpressionUUID->"73654024-6bf4-474d-a8ed-cfd4a34270fd"],
+
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "sideEft", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sideEft", "[", 
+   RowBox[{"log_", ":", "Echo"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"pipe", "[", 
+    RowBox[{
+     RowBox[{"branch", "[", 
+      RowBox[{
+       RowBox[{"#", "/*", "log"}], ",", "Identity"}], "]"}], ",", "Last"}], 
+    "]"}], "&"}]}]}], "InitializationCell",
+ CellLabel->
+  "5/13/20 00:35:24 \
+In[4]:=",ExpressionUUID->"64f2032d-2257-406d-be4a-e67ddd076aa0"],
+
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "safePs", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"safePs", "=", 
+   RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+    RowBox[{"RunProcess", "\[IndentingNewLine]", ",", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"#StandardError", "=!=", "\"\<\>\""}], ",", 
+        RowBox[{
+         RowBox[{"Echo", "[", 
+          RowBox[{"#", ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<ERROR:\>\"", ",", "Red", ",", "Bold"}], "]"}]}], 
+          "]"}], ";", 
+         RowBox[{"Abort", "[", "]"}]}], ",", "#"}], "]"}], "&"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]}], "InitializationCell",
+ CellLabel->
+  "5/13/20 00:35:24 \
+In[6]:=",ExpressionUUID->"3cfb02b0-c687-499c-acd3-231b16d7d474"],
+
+Cell[CellGroupData[{
+
+Cell["WSTP", "Chapter",ExpressionUUID->"57deb468-cda9-4bde-b2f2-2d9ff81070de"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"<|", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\"\<target\>\"", "\[Rule]", "\"\<addtwo.exe\>\""}], 
+    "\[IndentingNewLine]", ",", 
+    RowBox[{"\"\<src\>\"", "\[Rule]", 
+     RowBox[{"{", "\"\<addtwo.c\>\"", "}"}]}], "\[IndentingNewLine]", ",", 
+    RowBox[{"\"\<tm\>\"", "\[Rule]", 
+     RowBox[{"{", "\"\<addtwo.tm\>\"", "}"}]}]}], "\[IndentingNewLine]", 
+   "|>"}], "//", "\[IndentingNewLine]", 
+  RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"branch", "[", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "File", " ", "name", " ", "for", " ", "our", " ", "compiling", " ", 
+       RowBox[{"target", ":"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"#target", "&"}], "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Ordinary", " ", "c", " ", 
+        RowBox[{"files", ":"}]}], " ", "*)"}], "\[IndentingNewLine]", ",", 
+      RowBox[{"#src", "&"}], "\[IndentingNewLine]", ",", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Convert", " ", "all", " ", "tm", " ", "to", " ", 
+        RowBox[{"c", ":"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"#tm", "&"}], "\[IndentingNewLine]", ",", 
+        RowBox[{"Map", "@", 
+         RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"branch", "[", 
+            RowBox[{"Identity", ",", 
+             RowBox[{"StringTemplate", "[", "\"\<``.c\>\"", "]"}]}], "]"}], 
+           "\[IndentingNewLine]", ",", 
+           RowBox[{
+            RowBox[{"sideEft", "[", 
+             RowBox[{
+              RowBox[{"Echo", "[", 
+               RowBox[{
+                RowBox[{"Style", "[", 
+                 RowBox[{"#", ",", "8"}], "]"}], ",", 
+                RowBox[{"Style", "[", 
+                 RowBox[{
+                 "\"\<tm process:\>\"", ",", "8", ",", "Black", ",", "Bold"}],
+                  "]"}]}], "]"}], "&"}], "]"}], "@", "\[IndentingNewLine]", 
+            RowBox[{"Apply", "@", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"safePs", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "\"\<wsprep\>\"", ",", "#1", ",", "\"\<-o\>\"", ",", "#2"}], 
+                 "}"}], "]"}], "&"}], ")"}]}]}], "\[IndentingNewLine]", ",", 
+           "Last"}], "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+       "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+    RowBox[{
+     RowBox[{"sideEft", "[", 
+      RowBox[{
+       RowBox[{"Echo", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"#", ",", "8"}], "]"}], ",", 
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<\\tdebug:\>\"", ",", "8", ",", "Red", ",", "Bold"}], 
+          "]"}]}], "]"}], "&"}], "]"}], "@", "Identity"}], 
+    "\[IndentingNewLine]", ",", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Compilation", ":"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"Apply", "@", 
+     RowBox[{"pipe", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"#1", ",", 
+         RowBox[{
+          RowBox[{"{", "##2", "}"}], "//", "Flatten"}]}], "}"}], "&"}], 
+      "]"}]}], "\[IndentingNewLine]", ",", 
+    RowBox[{
+     RowBox[{"AssociationThread", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\"\<target\>\"", ",", "\"\<src\>\""}], "}"}], ",", "#"}], 
+      "]"}], "&"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"sideEft", "[", 
+      RowBox[{
+       RowBox[{"Echo", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"#", ",", "8"}], "]"}], ",", 
+         RowBox[{"Style", "[", 
+          RowBox[{
+          "\"\<compile process:\>\"", ",", "8", ",", "Black", ",", "Bold"}], 
+          "]"}]}], "]"}], "&"}], "]"}], "@", "\[IndentingNewLine]", 
+     RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"\"\<tcc\>\"", ",", "\"\<-lwstp64i4\>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{"\"\<-o\>\"", ",", "#target"}], "}"}], ",", "#src"}], 
+         "}"}], "&"}], "\[IndentingNewLine]", ",", "Flatten", 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{
+        RowBox[{"sideEft", "[", 
+         RowBox[{
+          RowBox[{"Echo", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{"#", ",", "8"}], "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<\\tdebug:\>\"", ",", "8", ",", "Red", ",", "Bold"}],
+              "]"}]}], "]"}], "&"}], "]"}], "@", "Identity"}], 
+       "\[IndentingNewLine]", ",", "safePs"}], "\[IndentingNewLine]", "]"}]}],
+     "\[IndentingNewLine]", ",", 
+    RowBox[{"#target", "&"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellLabel->
+  "5/12/20 16:21:43 \
+In[7]:=",ExpressionUUID->"52765244-645c-498e-b505-0fb7d8440efc"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   StyleBox["\<\"tm process:\"\>",
+    StripOnInput->False,
+    LineColor->GrayLevel[0],
+    FrontFaceColor->GrayLevel[0],
+    BackFaceColor->GrayLevel[0],
+    GraphicsColor->GrayLevel[0],
+    FontSize->8,
+    FontWeight->Bold,
+    FontColor->GrayLevel[0]],
+   "EchoLabel"], " ", 
+  StyleBox[
+   RowBox[{"\[LeftAssociation]", 
+    RowBox[{
+     RowBox[{"\<\"ExitCode\"\>", "\[Rule]", "0"}], ",", 
+     RowBox[{"\<\"StandardOutput\"\>", "\[Rule]", "\<\"\"\>"}], ",", 
+     RowBox[{"\<\"StandardError\"\>", "\[Rule]", "\<\"\"\>"}]}], 
+    "\[RightAssociation]"}],
+   StripOnInput->False,
+   FontSize->8]}]], "Echo",ExpressionUUID->"e3721684-c0b3-4aa7-95c3-\
+b67a86216f62"],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   StyleBox["\<\"\\tdebug:\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[1, 0, 0],
+    FrontFaceColor->RGBColor[1, 0, 0],
+    BackFaceColor->RGBColor[1, 0, 0],
+    GraphicsColor->RGBColor[1, 0, 0],
+    FontSize->8,
+    FontWeight->Bold,
+    FontColor->RGBColor[1, 0, 0]],
+   "EchoLabel"], " ", 
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"\<\"addtwo.exe\"\>", ",", 
+     RowBox[{"{", "\<\"addtwo.c\"\>", "}"}], ",", 
+     RowBox[{"{", "\<\"addtwo.tm.c\"\>", "}"}]}], "}"}],
+   StripOnInput->False,
+   FontSize->8]}]], "Echo",ExpressionUUID->"57d1a96c-86a0-4619-a0a7-\
+37002d735407"],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   StyleBox["\<\"\\tdebug:\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[1, 0, 0],
+    FrontFaceColor->RGBColor[1, 0, 0],
+    BackFaceColor->RGBColor[1, 0, 0],
+    GraphicsColor->RGBColor[1, 0, 0],
+    FontSize->8,
+    FontWeight->Bold,
+    FontColor->RGBColor[1, 0, 0]],
+   "EchoLabel"], " ", 
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"\<\"tcc\"\>", ",", "\<\"-lwstp64i4\"\>", ",", "\<\"-o\"\>", 
+     ",", "\<\"addtwo.exe\"\>", ",", "\<\"addtwo.c\"\>", 
+     ",", "\<\"addtwo.tm.c\"\>"}], "}"}],
+   StripOnInput->False,
+   FontSize->8]}]], "Echo",ExpressionUUID->"b602af14-94f5-4fd8-aa15-\
+bc90a1826f8b"],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox[
+   StyleBox["\<\"ERROR:\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[1, 0, 0],
+    FrontFaceColor->RGBColor[1, 0, 0],
+    BackFaceColor->RGBColor[1, 0, 0],
+    GraphicsColor->RGBColor[1, 0, 0],
+    FontWeight->Bold,
+    FontColor->RGBColor[1, 0, 0]],
+   "EchoLabel"], " ", 
+  RowBox[{"\[LeftAssociation]", 
+   RowBox[{
+    RowBox[{"\<\"ExitCode\"\>", "\[Rule]", "1"}], ",", 
+    RowBox[{"\<\"StandardOutput\"\>", "\[Rule]", "\<\"\"\>"}], ",", 
+    RowBox[{"\<\"StandardError\"\>", 
+     "\[Rule]", "\<\"In file included from \
+addtwo.c:13:\\r\\nc:/portable/tcc/include/wstp.h:1028: error: ';' expected \
+(got \\\"wsint64\\\")\\r\\n\"\>"}]}], "\[RightAssociation]"}]}]], "Echo",Expre\
+ssionUUID->"f3663dfa-eb8c-41ed-a1bc-c69c63e75c0b"]
+}, Open  ]],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellLabel->
+  "5/12/20 16:21:43 \
+Out[7]=",ExpressionUUID->"80966364-5c9b-490d-a4a0-70d8201a16db"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["LibraryLink", "Chapter",ExpressionUUID->"e9c318d5-87fc-416d-a460-dc221cf38ef5"],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<CCompilerDriver`\>\"", 
+  "]"}]], "InitializationCell",
+ CellLabel->
+  "5/13/20 00:35:26 \
+In[8]:=",ExpressionUUID->"3bac92d4-f201-486d-83e3-25cf96f1a557"],
+
+Cell[CellGroupData[{
+
+Cell["Compiler configurations", "Subsubsection",ExpressionUUID->"de4657a8-f2b5-4274-a541-f225beb5e255"],
+
+Cell[TextData[{
+ "Already set ",
+ StyleBox["gccCfg", "Input"],
+ " as default."
+}], "Comment",ExpressionUUID->"3957be75-6c77-47d1-9ba9-ff0d4e069406"],
+
+Cell[BoxData["$CCompiler"], "tempInput",
+ CellLabel->
+  "5/12/20 21:46:15 \
+In[1]:=",ExpressionUUID->"6f7eca13-7cd9-4d47-ab27-05714e2a1075"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"extraOpts", "=", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"\"\<CompileOptions\>\"", "\[Rule]", "\"\<-O2\>\""}], 
+      "\[IndentingNewLine]", ",", 
+      RowBox[{"\"\<ShellOutputFunction\>\"", "\[Rule]", 
+       RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+        RowBox[{"StringTrim", ",", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"#", ",", "White", ",", 
+            RowBox[{"LineBreakWithin", "\[Rule]", "False"}]}], "]"}], "&"}], 
+         ",", "ToBoxes", "\[IndentingNewLine]", ",", 
+         RowBox[{
+          RowBox[{"Cell", "[", 
+           RowBox[{
+            RowBox[{"BoxData", "@", "#"}], ",", "\"\<Program\>\"", ",", 
+            RowBox[{"FontSize", "\[Rule]", "8"}], ",", 
+            RowBox[{"PageWidth", "\[Rule]", "\[Infinity]"}]}], "]"}], "&"}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{
+          RowBox[{"PaneBox", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"ImageSize", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"500", ",", "Automatic"}], "}"}]}], ",", 
+            RowBox[{"Scrollbars", "\[Rule]", "True"}]}], "]"}], "&"}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{
+          RowBox[{"Cell", "[", 
+           RowBox[{
+            RowBox[{"BoxData", "[", "#", "]"}], ",", "\"\<Output\>\""}], 
+           "]"}], "&"}], ",", "CellPrint"}], "\[IndentingNewLine]", "]"}]}]}],
+      "}"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tccCfg", "=", 
+   RowBox[{"extraOpts", "~", "Join", "~", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<Compiler\>\"", "\[Rule]", "GenericCCompiler"}], ",", 
+      RowBox[{
+      "\"\<CompilerInstallation\>\"", "\[Rule]", 
+       "\"\<C:\\\\Portable\\\\tcc\>\""}], ",", 
+      RowBox[{"\"\<CompilerName\>\"", "\[Rule]", "\"\<tcc.exe\>\""}]}], 
+     "}"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"gccCfg", "=", 
+   RowBox[{"extraOpts", "~", "Join", "~", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<Compiler\>\"", "\[Rule]", "GenericCCompiler"}], ",", 
+      RowBox[{
+      "\"\<CompilerInstallation\>\"", "\[Rule]", 
+       "\"\<C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\\mingw64\\\\bin\>\""}]\
+, ",", 
+      RowBox[{"\"\<CompilerName\>\"", "\[Rule]", "\"\<gcc.exe\>\""}]}], 
+     "}"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"gppCfg", "=", 
+   RowBox[{"extraOpts", "~", "Join", "~", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<Compiler\>\"", "\[Rule]", "GenericCCompiler"}], ",", 
+      RowBox[{
+      "\"\<CompilerInstallation\>\"", "\[Rule]", 
+       "\"\<C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\\mingw64\\\\bin\>\""}]\
+, ",", 
+      RowBox[{"\"\<CompilerName\>\"", "\[Rule]", "\"\<g++.exe\>\""}]}], 
+     "}"}]}]}], ";"}]}], "Input",
+ CellLabel->
+  "5/12/20 21:50:08 \
+In[17]:=",ExpressionUUID->"072613de-1830-49d7-ae89-78163dfe91ec"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Demo: division of two real numbers (successful)", "Subsubsection",ExpressionUUID->"fa10438c-f68b-435b-9233-de48363284bb"],
+
+Cell["\<\
+TCC compiles much faster than GCC, but the result executes much slower.\
+\>", "Text",ExpressionUUID->"872528fc-ae01-41ea-aff7-21862e4b0632"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CreateLibrary", "[", 
+  RowBox[{
+   RowBox[{"File", "@", "\"\<Division\\\\Division.cpp\>\""}], ",", 
+   "\"\<liblink_Division_gcc\>\"", ",", 
+   RowBox[{"\"\<TargetDirectory\>\"", "\[Rule]", "\"\<Division\>\""}]}], 
+  "]"}]], "Input",
+ CellLabel->
+  "5/12/20 21:56:11 \
+In[37]:=",ExpressionUUID->"abcbce66-24fe-4b02-b3a2-37d76ed88b52"],
+
+Cell[BoxData[
+ PaneBox[Cell[BoxData[
+   StyleBox["\<\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\\
+Working-flerkengen1-12108-10468-5>C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\
+\\mingw64\\\\bin\\\\gcc.exe -shared -o \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\Working-\
+flerkengen1-12108-10468-5\\\\liblink_Division_gcc.dll\\\" -O2  \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\IncludeFiles\\\\C\\\" \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\Division.cpp\\\"\
+  -L\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Libraries\\\\Windows-x86-64\
+\\\"    2>&1\"\>",
+    StripOnInput->False,
+    LineBreakWithin->False,
+    LineColor->GrayLevel[1],
+    FrontFaceColor->GrayLevel[1],
+    BackFaceColor->GrayLevel[1],
+    GraphicsColor->GrayLevel[1],
+    FontColor->GrayLevel[1]]], "Program",
+   PageWidth:>DirectedInfinity[1],
+   FontSize->8,ExpressionUUID->"8dad2749-4098-461a-9c55-f1e0b91f3252"],
+  ImageSize->{500, Automatic},
+  Scrollbars->True]], "Output",ExpressionUUID->"c8cabda8-9e05-43e9-b8db-\
+7ee0513819e3"],
+
+Cell[BoxData["\<\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\\
+liblink_Division_gcc.dll\"\>"], "Output",
+ CellLabel->
+  "5/12/20 21:56:12 \
+Out[37]=",ExpressionUUID->"1f83c4ae-81a7-42c6-a84d-7b92922d7211"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Block", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"$CCompiler", "=", "tccCfg"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"CreateLibrary", "[", 
+    RowBox[{
+     RowBox[{"File", "@", "\"\<Division\\\\Division.c\>\""}], ",", 
+     "\"\<liblink_Division_tcc\>\"", ",", 
+     RowBox[{"\"\<TargetDirectory\>\"", "\[Rule]", "\"\<Division\>\""}]}], 
+    "]"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellLabel->
+  "5/12/20 21:50:13 \
+In[21]:=",ExpressionUUID->"6ff22cba-0cf9-43d2-bd9c-2c9a014e283f"],
+
+Cell[BoxData[
+ PaneBox[Cell[BoxData[
+   StyleBox["\<\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\\
+Working-flerkengen1-12108-10468-3>C:\\\\Portable\\\\tcc\\\\tcc.exe -shared -o \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\Working-\
+flerkengen1-12108-10468-3\\\\liblink_Division_tcc.dll\\\" -O2  \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\IncludeFiles\\\\C\\\" \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\Division.c\\\"  \
+-L\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Libraries\\\\Windows-x86-64\
+\\\"    2>&1\"\>",
+    StripOnInput->False,
+    LineBreakWithin->False,
+    LineColor->GrayLevel[1],
+    FrontFaceColor->GrayLevel[1],
+    BackFaceColor->GrayLevel[1],
+    GraphicsColor->GrayLevel[1],
+    FontColor->GrayLevel[1]]], "Program",
+   PageWidth:>DirectedInfinity[1],
+   FontSize->8,ExpressionUUID->"47c9bb50-d813-4b3f-84eb-e8b6d9b7ee4a"],
+  ImageSize->{500, Automatic},
+  Scrollbars->True]], "Output",ExpressionUUID->"e052298b-44f0-43f8-8fba-\
+c8d1d7929749"],
+
+Cell[BoxData["\<\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\\
+liblink_Division_tcc.dll\"\>"], "Output",
+ CellLabel->
+  "5/12/20 21:50:13 \
+Out[21]=",ExpressionUUID->"49cc9423-33f5-48f7-8686-a7889f8df02e"]
+}, Open  ]],
+
+Cell[TextData[{
+ "List all exported functions in DLL using ",
+ StyleBox["tcc -impdef", "Program"],
+ " :"
+}], "Text",ExpressionUUID->"2f604d2f-046a-4d2f-ba7f-76b108b2360d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+   "\"\<tcc\>\"", ",", "\"\<-impdef\>\"", "\[IndentingNewLine]", ",", 
+    "\"\<Division\\\\liblink_Division_gcc.dll\>\"", "\[IndentingNewLine]", 
+    ",", "\"\<-o\>\"", ",", "\"\<Division\\\\liblink_Division_gcc.def\>\""}], 
+   "\[IndentingNewLine]", "}"}], "//", "safePs"}]], "tempInput",
+ CellLabel->
+  "5/12/20 21:30:43 \
+In[31]:=",ExpressionUUID->"b13b6944-696d-4d3e-9fc3-a27a417853ef"],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{"\<\"ExitCode\"\>", "\[Rule]", "0"}], ",", 
+   RowBox[{"\<\"StandardOutput\"\>", "\[Rule]", "\<\"\"\>"}], ",", 
+   RowBox[{"\<\"StandardError\"\>", "\[Rule]", "\<\"\"\>"}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellLabel->
+  "5/12/20 21:30:43 \
+Out[31]=",ExpressionUUID->"58b583d8-a07b-4a3e-9bb7-ce41630834ea"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Import", "[", 
+   RowBox[{
+   "\"\<Division\\\\liblink_Division_gcc.def\>\"", ",", "\"\<Lines\>\""}], 
+   "]"}], "//", "Multicolumn"}]], "tempInput",
+ CellLabel->
+  "5/12/20 21:30:58 \
+In[32]:=",ExpressionUUID->"df1b1821-d49c-4705-9f24-1385dc1b5f5a"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"LIBRARY liblink_Division_gcc.dll\"\>", "\<\"Division\"\>", \
+"\<\"WolframLibrary_uninitialize\"\>"},
+    {"\<\"\"\>", "\<\"WolframLibrary_getVersion\"\>", ""},
+    {"\<\"EXPORTS\"\>", "\<\"WolframLibrary_initialize\"\>", ""}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellLabel->
+  "5/12/20 21:30:58 \
+Out[32]=",ExpressionUUID->"ddca59c2-5d26-4ebf-875b-7804a04f7504"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Block", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"$LibraryPath", "=", 
+     RowBox[{"$LibraryPath", "~", "Append", "~", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Directory", "[", "]"}], ",", "\"\<Division\>\""}], "}"}], 
+       "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"func", "=", 
+    RowBox[{"LibraryFunctionLoad", "[", 
+     RowBox[{
+     "\"\<liblink_Division_gcc.dll\>\"", "\[IndentingNewLine]", ",", 
+      "\"\<Division\>\"", ",", 
+      RowBox[{"{", 
+       RowBox[{"Real", ",", "Real"}], "}"}], ",", "Real"}], 
+     "\[IndentingNewLine]", "]"}]}]}], "]"}]], "Input",
+ CellLabel->
+  "5/12/20 21:56:33 \
+In[38]:=",ExpressionUUID->"50f5e027-218f-4e7f-8d64-52122f62d19d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox["LibraryFunction",
+    "SummaryHead"], "[", 
+   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready"}, 
+    TemplateBox[{
+      PaneSelectorBox[{False -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource[
+               "FEBitmaps", "SquarePlusIconMedium"]], 
+              ButtonFunction :> (Typeset`open$$ = True), Appearance -> None, 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
+            GraphicsBox[{
+              Thickness[0.038461538461538464`], {
+               FaceForm[{
+                 GrayLevel[0.93], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{1, 4, 3}, {0, 1, 0}, {1, 3, 3}, {0, 1, 0}, {
+                1, 3, 3}, {0, 1, 0}, {1, 3, 3}, {0, 1, 0}}}, {{{
+                25.499999999999996`, 2.5}, {25.499999999999996`, 
+                1.3953100000000003`}, {24.604699999999998`, 
+                0.49999999999999994`}, {23.5, 0.49999999999999994`}, {2.5, 
+                0.49999999999999994`}, {1.3953100000000003`, 
+                0.49999999999999994`}, {0.49999999999999994`, 
+                1.3953100000000003`}, {0.49999999999999994`, 2.5}, {
+                0.49999999999999994`, 23.5}, {0.49999999999999994`, 
+                24.604699999999998`}, {1.3953100000000003`, 
+                25.499999999999996`}, {2.5, 25.499999999999996`}, {23.5, 
+                25.499999999999996`}, {24.604699999999998`, 
+                25.499999999999996`}, {25.499999999999996`, 
+                24.604699999999998`}, {25.499999999999996`, 23.5}, {
+                25.499999999999996`, 2.5}}}]}, {
+               FaceForm[{
+                 RGBColor[0.5, 0.5, 0.5], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{20.5426, 
+                19.116799999999998`}, {16.3832, 21.876199999999997`}, {
+                16.3832, 20.021499999999996`}, {6.930469999999999, 
+                20.021499999999996`}, {6.930469999999999, 
+                18.212100000000003`}, {16.3832, 18.212100000000003`}, {
+                16.3832, 16.357399999999995`}, {20.5426, 
+                19.116799999999998`}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{5.30508, 13.8391}, {
+                9.46445, 11.079700000000003`}, {9.46445, 
+                12.933999999999997`}, {18.917199999999998`, 
+                12.933999999999997`}, {18.917199999999998`, 14.7438}, {
+                9.46445, 14.7438}, {9.46445, 16.598}, {5.30508, 13.8391}}}], 
+               
+               FilledCurveBox[{{{1, 4, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {
+                0, 1, 0}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 
+                3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {0, 1, 0}, {1, 3, 3}, {1,
+                 3, 3}, {1, 3, 3}, {1, 3, 3}}}, CompressedData["
+1:eJxTTMoPSmVmYGBgBGJjIGYCYq4u+eR3VWoOxhkv5j+Qk3SA8fu/r5rKOVHM
+Yd2vmNyjZ9Qcrt9QXbW9S8RBg59767IidQcPMYPGaHFhB+Nn61SfiGo4xBwp
+T7o2V9Dh0Iolfg6/NBxEHv/x1Xgi4FB1XNNqkqQWnP+axUTQjFkbzn+oO2HB
+j/3aDg/Xn5T6WiDoYLs3aJpiqI7DrHN+bO6tQg4zfUR7vF7pQOyfIQyRd9d1
+WLL0U1kLoyjEPdm6DpoTXfQX7xBzKPjQejLkhDacL5J4+LL2Gm2HtNnSl4Vf
+iELM69J2qPZM3tLnJerQX1oozZugDfHPUxGI/4W1HQ5p3TthoyDi4D7lG1v8
+Mi2HgqL9zoEHhB1inOxe3BRG8MH62zXhfIbN1Z82CGhC/GMg4nCm3mN/7TYN
+iHlCUPdGakDc/1kUEr46GhD/eYnD+d9iBf/kC0vC+TuCrSL+X5Vy2HGR4R5T
+uAbEfxYykPBYp+HQqsCuesZAFhL+rJoQ/2rIQdxTpwkJ7yVycPfD+GDzVqLx
+xbUd5HYt2JfqBdWfpA2Jj9mykPDpgYaXtaxDy7yzq86vg8qvlIHE5ylY/Eo7
+XAt7o787TxfOB5ufqesQ9PbyxxkPZSDhZ6nrMAGU3u7LQtLLEx2HN2253UbX
+ofZ76jis/Pay4oynAsT8QG0HKZMv/gW7FCDyTFpwPsz/MD44/Mw1HFjb1uR9
+TVVwWKy880/7FHWIexrkIfLX1RzOMDZZVjHIOaDkh3vSDuj5AwCF11Vc
+                "]]}}, Background -> GrayLevel[0.93], Axes -> False, 
+             AspectRatio -> 1, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}], Frame -> True, 
+             FrameTicks -> None, FrameStyle -> Directive[
+               Thickness[Tiny], 
+               GrayLevel[0.7]]], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Function name: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"Division\"", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Argument count: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["2", "SummaryItem"]}]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}], True -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource[
+               "FEBitmaps", "SquareMinusIconMedium"]], 
+              ButtonFunction :> (Typeset`open$$ = False), Appearance -> None, 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
+            GraphicsBox[{
+              Thickness[0.038461538461538464`], {
+               FaceForm[{
+                 GrayLevel[0.93], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{1, 4, 3}, {0, 1, 0}, {1, 3, 3}, {0, 1, 0}, {
+                1, 3, 3}, {0, 1, 0}, {1, 3, 3}, {0, 1, 0}}}, {{{
+                25.499999999999996`, 2.5}, {25.499999999999996`, 
+                1.3953100000000003`}, {24.604699999999998`, 
+                0.49999999999999994`}, {23.5, 0.49999999999999994`}, {2.5, 
+                0.49999999999999994`}, {1.3953100000000003`, 
+                0.49999999999999994`}, {0.49999999999999994`, 
+                1.3953100000000003`}, {0.49999999999999994`, 2.5}, {
+                0.49999999999999994`, 23.5}, {0.49999999999999994`, 
+                24.604699999999998`}, {1.3953100000000003`, 
+                25.499999999999996`}, {2.5, 25.499999999999996`}, {23.5, 
+                25.499999999999996`}, {24.604699999999998`, 
+                25.499999999999996`}, {25.499999999999996`, 
+                24.604699999999998`}, {25.499999999999996`, 23.5}, {
+                25.499999999999996`, 2.5}}}]}, {
+               FaceForm[{
+                 RGBColor[0.5, 0.5, 0.5], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{20.5426, 
+                19.116799999999998`}, {16.3832, 21.876199999999997`}, {
+                16.3832, 20.021499999999996`}, {6.930469999999999, 
+                20.021499999999996`}, {6.930469999999999, 
+                18.212100000000003`}, {16.3832, 18.212100000000003`}, {
+                16.3832, 16.357399999999995`}, {20.5426, 
+                19.116799999999998`}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{5.30508, 13.8391}, {
+                9.46445, 11.079700000000003`}, {9.46445, 
+                12.933999999999997`}, {18.917199999999998`, 
+                12.933999999999997`}, {18.917199999999998`, 14.7438}, {
+                9.46445, 14.7438}, {9.46445, 16.598}, {5.30508, 13.8391}}}], 
+               
+               FilledCurveBox[{{{1, 4, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {
+                0, 1, 0}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 
+                3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {0, 1, 0}, {1, 3, 3}, {1,
+                 3, 3}, {1, 3, 3}, {1, 3, 3}}}, CompressedData["
+1:eJxTTMoPSmVmYGBgBGJjIGYCYq4u+eR3VWoOxhkv5j+Qk3SA8fu/r5rKOVHM
+Yd2vmNyjZ9Qcrt9QXbW9S8RBg59767IidQcPMYPGaHFhB+Nn61SfiGo4xBwp
+T7o2V9Dh0Iolfg6/NBxEHv/x1Xgi4FB1XNNqkqQWnP+axUTQjFkbzn+oO2HB
+j/3aDg/Xn5T6WiDoYLs3aJpiqI7DrHN+bO6tQg4zfUR7vF7pQOyfIQyRd9d1
+WLL0U1kLoyjEPdm6DpoTXfQX7xBzKPjQejLkhDacL5J4+LL2Gm2HtNnSl4Vf
+iELM69J2qPZM3tLnJerQX1oozZugDfHPUxGI/4W1HQ5p3TthoyDi4D7lG1v8
+Mi2HgqL9zoEHhB1inOxe3BRG8MH62zXhfIbN1Z82CGhC/GMg4nCm3mN/7TYN
+iHlCUPdGakDc/1kUEr46GhD/eYnD+d9iBf/kC0vC+TuCrSL+X5Vy2HGR4R5T
+uAbEfxYykPBYp+HQqsCuesZAFhL+rJoQ/2rIQdxTpwkJ7yVycPfD+GDzVqLx
+xbUd5HYt2JfqBdWfpA2Jj9mykPDpgYaXtaxDy7yzq86vg8qvlIHE5ylY/Eo7
+XAt7o787TxfOB5ufqesQ9PbyxxkPZSDhZ6nrMAGU3u7LQtLLEx2HN2253UbX
+ofZ76jis/Pay4oynAsT8QG0HKZMv/gW7FCDyTFpwPsz/MD44/Mw1HFjb1uR9
+TVVwWKy880/7FHWIexrkIfLX1RzOMDZZVjHIOaDkh3vSDuj5AwCF11Vc
+                "]]}}, Background -> GrayLevel[0.93], Axes -> False, 
+             AspectRatio -> 1, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}], Frame -> True, 
+             FrameTicks -> None, FrameStyle -> Directive[
+               Thickness[Tiny], 
+               GrayLevel[0.7]]], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Function name: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"Division\"", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Argument count: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["2", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Argument types: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  PaneBox[
+                   RowBox[{"{", 
+                    RowBox[{"Real", ",", "Real"}], "}"}], 
+                   ImageSize -> {{1, 500}, Automatic}, BaselinePosition -> 
+                   Baseline, ContentPadding -> False, FrameMargins -> 0, 
+                   StripOnInput -> True], "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Return type: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  PaneBox[
+                  "Real", ImageSize -> {{1, 500}, Automatic}, 
+                   BaselinePosition -> Baseline, ContentPadding -> False, 
+                   FrameMargins -> 0, StripOnInput -> True], 
+                  "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Library: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"liblink_Division_gcc.dll\"", "SummaryItem"]}]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}]}, 
+       Dynamic[Typeset`open$$], ImageSize -> Automatic]},
+     "SummaryPanel"],
+    DynamicModuleValues:>{}], "]"}],
+  LibraryFunction[
+  "D:\\gitrepos\\golib-interface\\draft\\Division\\liblink_Division_gcc.dll", 
+   "Division", {Real, Real}, Real],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellLabel->
+  "5/12/20 21:56:33 \
+Out[38]=",ExpressionUUID->"46768394-9cca-46db-a99a-6f03eeb5e6cd"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"LibraryFunctionInformation", "[", "func", "]"}], "//", 
+     "Association"}], "//", 
+    RowBox[{"MapAt", "[", 
+     RowBox[{"FileNameTake", ",", "\"\<File\>\""}], "]"}]}], "//", 
+   "Dataset"}], "//", "DatasetGrid"}]], "tempInput",
+ CellLabel->
+  "5/12/20 21:57:10 \
+In[41]:=",ExpressionUUID->"8e889a9c-a9c1-48e3-ac15-34e741dbe6ed"],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[GridBox[{
+     {
+      ItemBox[
+       PaneBox["\<\"ReturnType\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{1, Full}, Automatic}],
+       Alignment->{Left, Baseline},
+       Background->GrayLevel[0.95],
+       StripOnInput->False], 
+      ItemBox[
+       PaneBox[
+        StyleBox["Real",
+         ShowStringCharacters->True,
+         FontFamily->"Source Code Pro"],
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{60, Full}, Automatic}],
+       ItemSize->{Full, Automatic},
+       StripOnInput->False]},
+     {
+      ItemBox[
+       PaneBox["\<\"ArgumentTypes\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{1, Full}, Automatic}],
+       Alignment->{Left, Baseline},
+       Background->GrayLevel[0.95],
+       StripOnInput->False], 
+      ItemBox[
+       PaneBox[
+        StyleBox[
+         RowBox[{"{", 
+          RowBox[{"Real", ",", "Real"}], "}"}],
+         StripOnInput->False,
+         ShowStringCharacters->False],
+        ImageMargins->{{5, 3}, {4, 5}}],
+       StripOnInput->False]},
+     {
+      ItemBox[
+       PaneBox["\<\"File\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{1, Full}, Automatic}],
+       Alignment->{Left, Baseline},
+       Background->GrayLevel[0.95],
+       StripOnInput->False], 
+      ItemBox[
+       PaneBox["\<\"liblink_Division_gcc.dll\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{230.40000000000003`, Full}, Automatic}],
+       ItemSize->{Full, Automatic},
+       StripOnInput->False]},
+     {
+      ItemBox[
+       PaneBox["\<\"Function\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{1, Full}, Automatic}],
+       Alignment->{Left, Baseline},
+       Background->GrayLevel[0.95],
+       StripOnInput->False], 
+      ItemBox[
+       PaneBox["\<\"Division\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{76.80000000000001, Full}, Automatic}],
+       ItemSize->{Full, Automatic},
+       StripOnInput->False]}
+    },
+    AutoDelete->False,
+    BaseStyle->{FontFamily -> "Verdana", FontSize -> 12},
+    FrameStyle->GrayLevel[0.7490196078431373],
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{0}}, "Rows" -> {{0}}}],
+   "Grid"],
+  StripOnInput->False,
+  ShowAutoStyles->False,
+  NumberMarks->False,
+  LineBreakWithin->False]], "Output",
+ CellLabel->
+  "5/12/20 21:57:10 \
+Out[41]=",ExpressionUUID->"3c52f36b-38dc-4fc7-8a71-ff23d6c5bb4a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"branch", "[", 
+     RowBox[{"func", ",", "Divide"}], "]"}], "@@@", 
+    RowBox[{"RandomReal", "[", 
+     RowBox[{"1", ",", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "2"}], "}"}]}], "]"}]}], "//", "Transpose"}], "//", 
+  RowBox[{
+   RowBox[{"Grid", "[", 
+    RowBox[{"#", ",", 
+     RowBox[{"Dividers", "\[Rule]", "Center"}]}], "]"}], "&"}]}]], "Input",
+ CellLabel->
+  "5/12/20 21:58:20 \
+In[45]:=",ExpressionUUID->"e10405ce-30f7-4a0d-8581-4175bcdc2659"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"1.8452910900651602`", "2.8656877283633233`", "0.6953156067261751`", 
+     "0.9111453522109828`", "4.64208005173568`", "4.785467164652966`"},
+    {"1.8452910900651602`", "2.8656877283633233`", "0.6953156067261751`", 
+     "0.9111453522109828`", "4.64208005173568`", "4.785467164652966`"}
+   },
+   AutoDelete->False,
+   GridBoxDividers->{
+    "Columns" -> {False, {True}, False}, "Rows" -> {False, {True}, False}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellLabel->
+  "5/12/20 21:58:20 \
+Out[45]=",ExpressionUUID->"cbf504e7-2e7d-47e8-81d0-26f7426b1122"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{"LibraryFunctionUnload", "[", "func", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Remove", "[", "func", "]"}]}], "Input",
+ CellLabel->
+  "5/12/20 21:58:28 \
+In[46]:=",ExpressionUUID->"43f556ba-8853-4883-9491-5ef41b703a9c"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Demo: using the wll-interface (failed)", "Subsubsection",ExpressionUUID->"ea323db1-7a17-4eae-88de-c3d05ea4ec2a"],
+
+Cell[TextData[ButtonBox["https://github.com/njpipeorgan/wll-interface",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["https://github.com/njpipeorgan/wll-interface"], None},
+ ButtonNote->"https://github.com/njpipeorgan/wll-interface"]], "Comment",Expre\
+ssionUUID->"9e264e35-1065-4223-b8b6-4be1d779cd63"],
+
+Cell["\<\
+#include \"wll_interface.h\"  // include the header file
+
+double multiply(double x, int y)
+{
+    return x * y;
+}
+
+DEFINE_WLL_FUNCTION(multiply)  // defines wll_multiply\
+\>", "Program",
+ CellTags->
+  "wll-demo-src",ExpressionUUID->"28a85604-2bc3-45c2-90bd-b11dd43998fb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\"\<wll-demo-src\>\"", "//", 
+  RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pipe", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Cells", "[", 
+        RowBox[{"CellTags", "\[Rule]", "#"}], "]"}], "&"}], ",", "Last", ",", 
+      "NotebookRead", ",", "First"}], "]"}], "\[IndentingNewLine]", ",", 
+    RowBox[{
+     RowBox[{"CreateLibrary", "[", 
+      RowBox[{
+      "#", "\[IndentingNewLine]", ",", "\"\<wll_multiply\>\"", 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"\"\<IncludeDirectories\>\"", "\[Rule]", 
+        RowBox[{
+        "{", "\"\<D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\inc\>\"", 
+         "}"}]}]}], "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{",", 
+        RowBox[{"Language", "\[Rule]", "\"\<C++\>\""}], "\[IndentingNewLine]",
+         ",", 
+        RowBox[{"\"\<CompileOptions\>\"", "\[Rule]", "\"\<-std=c++17\>\""}]}],
+        "*)"}], "\[IndentingNewLine]", "]"}], "&"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellLabel->
+  "5/12/20 22:48:06 \
+In[78]:=",ExpressionUUID->"991377c3-193a-4573-a985-7de15e1a5d18"],
+
+Cell[BoxData[
+ PaneBox[Cell[BoxData[
+   StyleBox["\<\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\
+\\SystemFiles\\\\LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-\
+12108-10468-22>C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\\mingw64\\\\bin\\\\\
+gcc.exe -shared -o \
+\\\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\
+\\\\LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-12108-10468-22\\\
+\\wll_multiply.dll\\\" -O2  -I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\IncludeFiles\\\\C\\\" \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" \
+-I\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\inc\\\" \\\"C:\\\\Users\\\
+\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\\\\\
+LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-12108-10468-22\\\\\
+wll_multiply.c\\\"  -L\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Libraries\\\\Windows-x86-64\
+\\\"    2>&1 \\nIn file included from \
+C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\\\\\
+LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-12108-10468-22\\\\\
+wll_multiply.c:1:\\nD:\\\\gitrepos\\\\golib-interface\\\\draft\\\\inc/wll_\
+interface.h:8:10: fatal error: cassert: No such file or directory\\n #include \
+<cassert>\\n          ^~~~~~~~~\\ncompilation terminated.\"\>",
+    StripOnInput->False,
+    LineBreakWithin->False,
+    LineColor->GrayLevel[1],
+    FrontFaceColor->GrayLevel[1],
+    BackFaceColor->GrayLevel[1],
+    GraphicsColor->GrayLevel[1],
+    FontColor->GrayLevel[1]]], "Program",
+   PageWidth:>DirectedInfinity[1],
+   FontSize->8,ExpressionUUID->"bb671f79-6430-4297-b72c-7bbca8f768b2"],
+  ImageSize->{500, Automatic},
+  Scrollbars->True]], "Output",ExpressionUUID->"2448491b-58fd-4101-96dd-\
+166d2dc2a65e"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CreateLibrary", "cmperr", 
+   "\"Compile error: \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\\\\\\\\\\gitrepos\\\\\\\\\\\\\\\\golib-\
+interface\\\\\\\\\\\\\\\\draft\\\\\\\\\\\\\\\\inc/wll_interface.h:8:10: fatal \
+error: cassert: No such file or directory\\\\\\\"\\\"}]\\)\"", 2, 78, 19, 
+   19048858217763697533, "Local", "CCompilerDriver`CreateLibrary"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->
+  "5/12/20 22:48:06 During evaluation of \
+In[78]:=",ExpressionUUID->"57e4eae9-6457-4bb1-9127-74ac70dae63f"],
+
+Cell[BoxData["$Failed"], "Output",
+ CellLabel->
+  "5/12/20 22:48:06 \
+Out[78]=",ExpressionUUID->"7af2ae35-0946-4dd3-8fa8-e335628bd1ee"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["wll", "Input"],
+ " requires ",
+ StyleBox["cassert.h", "Input"],
+ " etc., which are not included in ",
+ StyleBox["gcc", "Input"],
+ "."
+}], "Comment",ExpressionUUID->"cabb180a-f1e1-497e-b16d-e0eb8fb6b804"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Demo: using the LTemplate", "Subsubsection",ExpressionUUID->"3b60d883-d272-434e-98a1-6ccde4d72b27"],
+
+Cell[TextData[ButtonBox["https://github.com/szhorvat/LTemplate",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["https://github.com/szhorvat/LTemplate"], None},
+ ButtonNote->"https://github.com/szhorvat/LTemplate"]], "Comment",ExpressionUU\
+ID->"fd37b6ad-80fc-4c56-bd5e-ddb8afb15997"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "LTemplate`"}]], "Input",
+ CellLabel->
+  "5/13/20 00:36:11 \
+In[10]:=",ExpressionUUID->"45cb4d23-7d7d-4395-81b8-843a0d52abc9"],
+
+Cell[BoxData["\<\"WARNING: LTemplate has not yet been tested with Mathematica \
+12.1.0.\\nThe latest supported Mathematica version is 12.0.0.\\nPlease report \
+any issues you find to szhorvat at gmail.com.\"\>"], "Print",
+ CellLabel->
+  "5/13/20 00:36:11 During evaluation of \
+In[10]:=",ExpressionUUID->"8dd00626-1021-4d4d-82b1-47568c2f4f4d"]
+}, Open  ]],
+
+Cell["\<\
+#include <LTemplate.h>
+
+class Demo1 {
+public:
+\t// basic example
+\tmint addTwo(mint a, mint b) { return a+b; }
+
+\t// trace of real matrix
+\tdouble trace(mma::RealMatrixRef mat) {
+\t\tif (mat.rows() != mat.cols())
+\t\t\tthrow mma::LibraryError(\"trace: Square matrix expected.\");
+\t\tdouble sum = 0.0;
+\t\tfor (mint i=0; i < mat.rows(); ++i) {
+\t\t\tsum += mat(i,i);
+\t\t\tmma::check_abort(); // allow for user aborts
+\t\t}
+\t\treturn sum;
+\t}
+};\
+\>", "Program",
+ CellTags->
+  "LTemplate-demo-src",ExpressionUUID->"57984d4c-9e1b-4bfc-ab70-8f2a0892697d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\"\<LTemplate-demo-src\>\"", "//", 
+  RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pipe", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Cells", "[", 
+        RowBox[{"CellTags", "\[Rule]", "#"}], "]"}], "&"}], ",", "Last", ",", 
+      "NotebookRead", ",", "First"}], "]"}], "\[IndentingNewLine]", ",", 
+    RowBox[{
+     RowBox[{"Export", "[", 
+      RowBox[{"\"\<Demo1.h\>\"", ",", "#", ",", "\"\<String\>\""}], "]"}], 
+     "&"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellLabel->
+  "5/13/20 00:35:31 \
+In[9]:=",ExpressionUUID->"fa527f31-71fc-4bbd-8d80-a7db323e47fe"],
+
+Cell[BoxData["\<\"Demo1.h\"\>"], "Output",
+ CellLabel->
+  "5/13/20 00:35:31 \
+Out[9]=",ExpressionUUID->"d7a0bd66-0208-4530-848e-ca98ac5dcc97"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"template", "=", "\[IndentingNewLine]", 
+   RowBox[{"LTemplate", "[", 
+    RowBox[{"\"\<DemoLib\>\"", ",", " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{"library", " ", "name"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{"LClass", "[", 
+       RowBox[{"\"\<Demo1\>\"", ",", " ", 
+        RowBox[{"(*", " ", 
+         RowBox[{"class", " ", "name"}], " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{"member", " ", "functions"}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"LFun", "[", 
+           RowBox[{"\"\<addTwo\>\"", ",", 
+            RowBox[{"{", 
+             RowBox[{"Integer", ",", "Integer"}], "}"}], ",", "Integer"}], 
+           "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"LFun", "[", 
+           RowBox[{"\"\<trace\>\"", ",", 
+            RowBox[{"{", 
+             RowBox[{"{", 
+              RowBox[{"Real", ",", "2"}], "}"}], " ", 
+             RowBox[{"(*", " ", "matrix", " ", "*)"}], "}"}], ",", "Real"}], 
+           "]"}]}], "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", 
+       "]"}], "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}]], "Input",ExpressionUUID->"cb443233-1c9c-46c8-97c6-0719176673fe"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"template", "//", "FormatTemplate"}]], "tempInput",
+ CellLabel->
+  "5/13/20 00:42:42 \
+In[14]:=",ExpressionUUID->"cccd5dda-0e29-4477-b085-3d895f45fe74"],
+
+Cell[BoxData["\<\"template DemoLib\\n\\nclass Demo1:\\n    Integer \
+addTwo(Integer, Integer)\\n    Real trace(List<Real, 2>)\"\>"], "Output",
+ CellLabel->
+  "5/13/20 00:42:42 \
+Out[14]=",ExpressionUUID->"f57e738c-18f3-4636-9940-ded659c463d4"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\"\<C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\\mingw64\\\\bin\
+\\\\gcc.exe -shared -o \
+\\\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\
+\\\\LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-10488-23400-1\\\
+\\DemoLib.dll\\\" -std=c++11 -O2  -I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\IncludeFiles\\\\C\\\" \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" \
+-I\\\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\\
+Applications\\\\LTemplate\\\\IncludeFiles\\\" \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp\\\"  \
+-L\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Libraries\\\\Windows-x86-64\
+\\\"    2>&1 \\\\nIn file included from \
+C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\Applications\\\\\
+LTemplate\\\\IncludeFiles/LTemplate.h:33,\\\\n                 from \
+D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp:6:\>\""], \
+"Input",
+ CellLabel->
+  "5/13/20 00:50:10 \
+In[17]:=",ExpressionUUID->"ada5ad12-fe2e-4a80-a19b-02f0e56179c2"],
+
+Cell[BoxData["\<\"C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\\mingw64\\\\bin\
+\\\\gcc.exe -shared -o \
+\\\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\
+\\\\LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-10488-23400-1\\\
+\\DemoLib.dll\\\" -std=c++11 -O2  -I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\IncludeFiles\\\\C\\\" \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" \
+-I\\\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\\
+Applications\\\\LTemplate\\\\IncludeFiles\\\" \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp\\\"  \
+-L\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Libraries\\\\Windows-x86-64\
+\\\"    2>&1 \\\\nIn file included from \
+C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\Applications\\\\\
+LTemplate\\\\IncludeFiles/LTemplate.h:33,\\\\n                 from \
+D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp:6:\"\>"], \
+"Output",
+ CellLabel->
+  "5/13/20 00:50:11 \
+Out[17]=",ExpressionUUID->"f17722cb-7b14-4a8a-82e3-947fdc4df900"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CompileTemplate", "[", 
+  RowBox[{"template", ",", 
+   RowBox[{"Language", "\[Rule]", "\"\<C++\>\""}]}], "]"}]], "Input",
+ CellLabel->
+  "5/13/20 00:52:28 \
+In[18]:=",ExpressionUUID->"82278874-0528-439a-8261-e4ca6bab1c43"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"Current directory is: \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FrontFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    BackFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    GraphicsColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FontColor->RGBColor[0, 0, 
+      Rational[2, 3]]], "\[InvisibleSpace]", 
+   StyleBox["\<\"D:\\\\gitrepos\\\\golib-interface\\\\draft\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FrontFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    BackFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    GraphicsColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FontColor->RGBColor[0, 0, 
+      Rational[2, 3]]]}],
+  SequenceForm[
+   Style["Current directory is: ", 
+    RGBColor[0, 0, 
+     Rational[2, 3]]], 
+   Style["D:\\gitrepos\\golib-interface\\draft", 
+    RGBColor[0, 0, 
+     Rational[2, 3]]]],
+  Editable->False]], "Print",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"16a79e3c-f517-4946-aabb-886a4a138fad"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"Unloading library \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FrontFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    BackFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    GraphicsColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FontColor->RGBColor[0, 0, 
+      Rational[2, 3]]], "\[InvisibleSpace]", 
+   StyleBox["\<\"DemoLib\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FrontFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    BackFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    GraphicsColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FontColor->RGBColor[0, 0, 
+      Rational[2, 3]]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ...\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FrontFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    BackFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    GraphicsColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FontColor->RGBColor[0, 0, 
+      Rational[2, 3]]]}],
+  SequenceForm[
+   Style["Unloading library ", 
+    RGBColor[0, 0, 
+     Rational[2, 3]]], 
+   Style["DemoLib", 
+    RGBColor[0, 0, 
+     Rational[2, 3]]], 
+   Style[" ...", 
+    RGBColor[0, 0, 
+     Rational[2, 3]]]],
+  Editable->False]], "Print",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"b37ab962-3d8c-46d1-b14f-a1dfef3cd978"],
+
+Cell[BoxData[
+ StyleBox["\<\"Generating library code ...\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[0, 0, 
+    Rational[2, 3]],
+  FrontFaceColor->RGBColor[0, 0, 
+    Rational[2, 3]],
+  BackFaceColor->RGBColor[0, 0, 
+    Rational[2, 3]],
+  GraphicsColor->RGBColor[0, 0, 
+    Rational[2, 3]],
+  FontColor->RGBColor[0, 0, 
+    Rational[2, 3]]]], "Print",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"51a5dde6-a199-42f6-bd72-ad32169d6f2e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"LTemplate-DemoLib.cpp\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FrontFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    BackFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    GraphicsColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FontColor->RGBColor[0, 0, 
+      Rational[2, 3]]], "\[InvisibleSpace]", 
+   StyleBox["\<\" already exists and will be overwritten.\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FrontFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    BackFaceColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    GraphicsColor->RGBColor[0, 0, 
+      Rational[2, 3]],
+    FontColor->RGBColor[0, 0, 
+      Rational[2, 3]]]}],
+  SequenceForm[
+   Style["LTemplate-DemoLib.cpp", 
+    RGBColor[0, 0, 
+     Rational[2, 3]]], 
+   Style[" already exists and will be overwritten.", 
+    RGBColor[0, 0, 
+     Rational[2, 3]]]],
+  Editable->False]], "Print",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"6482e874-c9a6-4e67-8d88-4739830b4355"],
+
+Cell[BoxData[
+ StyleBox["\<\"Compiling library code ...\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[0, 0, 
+    Rational[2, 3]],
+  FrontFaceColor->RGBColor[0, 0, 
+    Rational[2, 3]],
+  BackFaceColor->RGBColor[0, 0, 
+    Rational[2, 3]],
+  GraphicsColor->RGBColor[0, 0, 
+    Rational[2, 3]],
+  FontColor->RGBColor[0, 0, 
+    Rational[2, 3]]]], "Print",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"0aef1518-d2cd-4d88-b51b-7476b2f63e8a"]
+}, Open  ]],
+
+Cell[BoxData[
+ PaneBox[Cell[BoxData[
+   StyleBox["\<\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\
+\\SystemFiles\\\\LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-\
+10488-23400-2>C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\\mingw64\\\\bin\\\\\
+gcc.exe -shared -o \
+\\\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\
+\\\\LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-10488-23400-2\\\
+\\DemoLib.dll\\\" -std=c++11 -O2  -I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\IncludeFiles\\\\C\\\" \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" \
+-I\\\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\\
+Applications\\\\LTemplate\\\\IncludeFiles\\\" \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp\\\"  \
+-L\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Libraries\\\\Windows-x86-64\
+\\\"    2>&1 \\nIn file included from \
+C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\Applications\\\\\
+LTemplate\\\\IncludeFiles/LTemplate.h:33,\\n                 from \
+D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp:6:\\nC:\\\
+\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:641:9: error: \
+'__int64' does not name a type; did you mean 'wint64'?\\n typedef __int64 \
+mlint64;\\n         ^~~~~~~\\n         wint64\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:642:9: error: \
+'__int64' does not name a type; did you mean 'wint64'?\\n typedef __int64 \
+wsint64;\\n         ^~~~~~~\\n         wint64\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:643:26: error: \
+expected initializer before 'mluint64'\\n typedef unsigned __int64 \
+mluint64;\\n                          ^~~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:644:26: error: \
+expected initializer before 'wsuint64'\\n typedef unsigned __int64 \
+wsuint64;\\n                          ^~~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:647:9: error: \
+'mlint64' does not name a type; did you mean 'wint64'?\\n typedef mlint64 \
+mlbigint;\\n         ^~~~~~~\\n         wint64\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:648:9: error: \
+'wsint64' does not name a type; did you mean 'wint64'?\\n typedef wsint64 \
+wsbigint;\\n         ^~~~~~~\\n         wint64\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:649:9: error: \
+'mluint64' does not name a type; did you mean 'wint64'?\\n typedef mluint64 \
+mlbiguint;\\n         ^~~~~~~~\\n         wint64\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:650:9: error: \
+'wsuint64' does not name a type; did you mean 'wint64'?\\n typedef wsuint64 \
+wsbiguint;\\n         ^~~~~~~~\\n         wint64\\nIn file included from C:\\\
+\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\Applications\\\\\
+LTemplate\\\\IncludeFiles/LTemplate.h:33,\\n                 from \
+D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp:6:\\nC:\\\
+\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:2572:9: error: \
+'mlint64' does not name a type; did you mean 'wint64'?\\n typedef mlint64     \
+       int64_nt;\\n         ^~~~~~~\\n         wint64\\nC:\\\\Program Files\\\
+\\Wolfram Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\
+\\\\DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:2573:9: \
+error: 'int64_nt' does not name a type; did you mean 'intpp_nt'?\\n typedef \
+int64_nt         * int64p_nt;\\n         ^~~~~~~~\\n         \
+intpp_nt\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:2574:9: error: \
+'int64p_nt' does not name a type; did you mean 'intpp_nt'?\\n typedef \
+int64p_nt        * int64pp_nt;\\n         ^~~~~~~~~\\n         intpp_nt\\nIn \
+file included from C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\
+\\\\Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.h:33,\\n              \
+   from D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp:6:\
+\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:3977:46: \
+error: 'mlint64' has not been declared\\n MLDECL( int,   MLGetInteger64,  ( \
+MLINK mlp, mlint64 *wp));\\n                                              \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:3977:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,   MLGetInteger64,  ( MLINK \
+mlp, mlint64 *wp));\\n ^~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4280:49: \
+error: 'mlint64' has not been declared\\n MLDECL( int,   MLPutInteger64,     \
+( MLINK mlp, mlint64 w));\\n                                                 \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4280:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,   MLPutInteger64,     ( MLINK \
+mlp, mlint64 w));\\n ^~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4633:85: \
+error: 'mlint64' does not name a type; did you mean 'wint64'?\\n MLDECL( int, \
+  MLPutInteger64ArrayData,     ( MLINK mlp, array_meterp meterp, const \
+mlint64 *      datap, int count));\\n                                         \
+                                            ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4633:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,   MLPutInteger64ArrayData,     \
+( MLINK mlp, array_meterp meterp, const mlint64 *      datap, int count));\\n \
+^~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4701:60: \
+error: 'mlint64' does not name a type; did you mean 'wint64'?\\n MLDECL( int, \
+  MLPutInteger64Array,     ( MLINK mlp, const mlint64 *      data, const int \
+*dims, const char **heads, int depth));\\n                                    \
+                        ^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4701:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,   MLPutInteger64Array,     ( \
+MLINK mlp, const mlint64 *      data, const int *dims, const char **heads, \
+int depth));\\n ^~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4764:58: \
+error: 'mlint64' does not name a type; did you mean 'wint64'?\\n MLDECL( int, \
+  MLPutInteger64List,    ( MLINK mlp, const mlint64 * data, int count));\\n   \
+                                                       ^~~~~~~\\nC:\\\\\
+Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4764:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,   MLPutInteger64List,    ( \
+MLINK mlp, const mlint64 * data, int count));\\n ^~~~~~\\nC:\\\\Program Files\
+\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4855:53: \
+error: 'mlint64' has not been declared\\n MLDECL( int,  MLGetInteger64List,   \
+   ( MLINK mlp, mlint64 ** datap, int *countp));\\n                           \
+                          ^~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\
+\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\\
+Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: in definition of \
+macro 'P'\\n #define P(s) s\\n              ^\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4855:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,  MLGetInteger64List,      ( \
+MLINK mlp, mlint64 ** datap, int *countp));\\n ^~~~~~\\nC:\\\\Program Files\\\
+\\Wolfram Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\
+\\\\DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4884:57: \
+error: 'mlint64' has not been declared\\n MLDECL( void, \
+MLReleaseInteger64List,      ( MLINK mlp, mlint64 *data, int count));\\n      \
+                                                   ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4884:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( void, MLReleaseInteger64List,      \
+( MLINK mlp, mlint64 *data, int count));\\n ^~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4908:79: \
+error: 'mlint64' has not been declared\\n MLDECL( int,   \
+MLGetInteger64ArrayData,     ( MLINK mlp, array_meterp meterp, mlint64 *      \
+ datap, int count));\\n                                                       \
+                        ^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4908:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,   MLGetInteger64ArrayData,     \
+( MLINK mlp, array_meterp meterp, mlint64 *       datap, int count));\\n \
+^~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4981:56: \
+error: 'mlint64' has not been declared\\n MLDECL( int,   MLGetInteger64Array, \
+      ( MLINK mlp, mlint64 **       datap, int **dimsp, char ***headsp, int \
+*depthp));\\n                                                        \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:4981:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,   MLGetInteger64Array,       ( \
+MLINK mlp, mlint64 **       datap, int **dimsp, char ***headsp, int \
+*depthp));\\n ^~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\
+\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-\
+64\\\\CompilerAdditions/mathlink.h:5041:67: error: 'mlint64' has not been \
+declared\\n MLDECL( void,           MLReleaseInteger64Array,     ( MLINK mlp, \
+mlint64 *      data, int *dims, char **heads, int depth));\\n                 \
+                                                  ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5041:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( void,           \
+MLReleaseInteger64Array,     ( MLINK mlp, mlint64 *      data, int *dims, \
+char **heads, int depth));\\n ^~~~~~\\nIn file included from \
+C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\Applications\\\\\
+LTemplate\\\\IncludeFiles/LTemplate.h:33,\\n                 from \
+D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp:6:\\nC:\\\
+\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5297:9: error: \
+'__int64' does not name a type; did you mean 'wint64'?\\n typedef __int64 \
+mldlg_result;\\n         ^~~~~~~\\n         wint64\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+typedef 'mldlg_result' is initialized (use decltype instead)\\n #define MLCB \
+__stdcall MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5302:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLAlertProcPtr,             ( MLEnvironment env, const \
+char *message));\\n ^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+expected primary-expression before '__attribute__'\\n #define MLCB __stdcall \
+MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5302:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLAlertProcPtr,             ( MLEnvironment env, const \
+char *message));\\n ^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+typedef 'mldlg_result' is initialized (use decltype instead)\\n #define MLCB \
+__stdcall MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5303:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLRequestProcPtr,           ( MLEnvironment env, const \
+char *prompt, char *response, long sizeof_response));\\n \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+expected primary-expression before '__attribute__'\\n #define MLCB __stdcall \
+MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5303:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLRequestProcPtr,           ( MLEnvironment env, const \
+char *prompt, char *response, long sizeof_response));\\n \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+typedef 'mldlg_result' is initialized (use decltype instead)\\n #define MLCB \
+__stdcall MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5304:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLConfirmProcPtr,           ( MLEnvironment env, const \
+char *question, mldlg_result default_answer));\\n ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+expected primary-expression before '__attribute__'\\n #define MLCB __stdcall \
+MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5304:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLConfirmProcPtr,           ( MLEnvironment env, const \
+char *question, mldlg_result default_answer));\\n ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+typedef 'mldlg_result' is initialized (use decltype instead)\\n #define MLCB \
+__stdcall MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5305:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLRequestArgvProcPtr,       ( MLEnvironment env, char \
+**argv, long cardof_argv, char *buf, long sizeof_buf));\\n \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+expected primary-expression before '__attribute__'\\n #define MLCB __stdcall \
+MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5305:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLRequestArgvProcPtr,       ( MLEnvironment env, char \
+**argv, long cardof_argv, char *buf, long sizeof_buf));\\n \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+typedef 'mldlg_result' is initialized (use decltype instead)\\n #define MLCB \
+__stdcall MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5306:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLRequestToInteractProcPtr, ( MLEnvironment env, \
+mldlg_result wait_for_permission));\\n ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+expected primary-expression before '__attribute__'\\n #define MLCB __stdcall \
+MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5306:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLRequestToInteractProcPtr, ( MLEnvironment env, \
+mldlg_result wait_for_permission));\\n ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+typedef 'mldlg_result' is initialized (use decltype instead)\\n #define MLCB \
+__stdcall MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5307:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLDialogProcPtr,            ( MLEnvironment env));\\n \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:748:14: error: \
+expected primary-expression before '__attribute__'\\n #define MLCB __stdcall \
+MLEXPORT\\n              ^~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:797:55: note: \
+in expansion of macro 'MLCB'\\n #define MLCBPROC( rtype, name, params) \
+typedef rtype (MLCB * name) P(params)\\n                                      \
+                 ^~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:821:17: note: \
+in expansion of macro 'MLCBPROC'\\n #define MLDPROC MLCBPROC\\n               \
+  ^~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\\\
+\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:5307:1: note: in expansion of macro 'MLDPROC'\\n \
+MLDPROC( mldlg_result, MLDialogProcPtr,            ( MLEnvironment env));\\n \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5310:9: error: \
+'MLDialogProcPtr' does not name a type; did you mean 'MLYielderProcPtr'?\\n \
+typedef MLDialogProcPtr MLDialogUPP;\\n         ^~~~~~~~~~~~~~~\\n         \
+MLYielderProcPtr\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5311:9: error: \
+'MLAlertProcPtr' does not name a type; did you mean 'MLUserProcPtr'?\\n \
+typedef MLAlertProcPtr MLAlertUPP;\\n         ^~~~~~~~~~~~~~\\n         \
+MLUserProcPtr\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5312:9: error: \
+'MLRequestProcPtr' does not name a type; did you mean 'MLUserProcPtr'?\\n \
+typedef MLRequestProcPtr MLRequestUPP;\\n         ^~~~~~~~~~~~~~~~\\n         \
+MLUserProcPtr\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5313:9: error: \
+'MLConfirmProcPtr' does not name a type; did you mean 'MLUserProcPtr'?\\n \
+typedef MLConfirmProcPtr MLConfirmUPP;\\n         ^~~~~~~~~~~~~~~~\\n         \
+MLUserProcPtr\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5314:9: error: \
+'MLRequestArgvProcPtr' does not name a type; did you mean \
+'NewMLRequestArgvProc'?\\n typedef MLRequestArgvProcPtr MLRequestArgvUPP;\\n  \
+       ^~~~~~~~~~~~~~~~~~~~\\n         NewMLRequestArgvProc\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5315:9: error: \
+'MLRequestToInteractProcPtr' does not name a type; did you mean \
+'NewMLRequestToInteractProc'?\\n typedef MLRequestToInteractProcPtr \
+MLRequestToInteractUPP;\\n         ^~~~~~~~~~~~~~~~~~~~~~~~~~\\n         \
+NewMLRequestToInteractProc\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5322:9: error: \
+'MLAlertUPP' does not name a type; did you mean 'MLUserUPP'?\\n typedef \
+MLAlertUPP MLAlertFunctionType;\\n         ^~~~~~~~~~\\n         \
+MLUserUPP\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5323:9: error: \
+'MLRequestUPP' does not name a type; did you mean 'MLUserUPP'?\\n typedef \
+MLRequestUPP MLRequestFunctionType;\\n         ^~~~~~~~~~~~\\n         \
+MLUserUPP\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5324:9: error: \
+'MLConfirmUPP' does not name a type; did you mean 'MLUserUPP'?\\n typedef \
+MLConfirmUPP MLConfirmFunctionType;\\n         ^~~~~~~~~~~~\\n         \
+MLUserUPP\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5325:9: error: \
+'MLRequestArgvUPP' does not name a type; did you mean 'NewMLRequestArgvProc'?\
+\\n typedef MLRequestArgvUPP MLRequestArgvFunctionType;\\n         \
+^~~~~~~~~~~~~~~~\\n         NewMLRequestArgvProc\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5326:9: error: \
+'MLRequestToInteractUPP' does not name a type; did you mean \
+'NewMLRequestToInteractProc'?\\n typedef MLRequestToInteractUPP \
+MLRequestToInteractFunctionType;\\n         ^~~~~~~~~~~~~~~~~~~~~~\\n         \
+NewMLRequestToInteractProc\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5327:9: error: \
+'MLDialogUPP' does not name a type; did you mean 'MLYielderUPP'?\\n typedef \
+MLDialogUPP MLDialogFunctionType;\\n         ^~~~~~~~~~~\\n         \
+MLYielderUPP\\nIn file included from \
+C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\Applications\\\\\
+LTemplate\\\\IncludeFiles/LTemplate.h:33,\\n                 from \
+D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\LTemplate-DemoLib.cpp:6:\\nC:\\\
+\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5371:10: \
+error: 'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n \
+MLDDECL( mldlg_result, MLAlert_win,   ( MLEnvironment ep, const char \
+*alertstr));\\n          ^~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:800:47: note: \
+in definition of macro 'MLCBDECL'\\n #define MLCBDECL( rtype, name, params) \
+extern rtype MLCB name P(params)\\n                                           \
+    ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5371:1: note: \
+in expansion of macro 'MLDDECL'\\n MLDDECL( mldlg_result, MLAlert_win,   ( \
+MLEnvironment ep, const char *alertstr));\\n ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5372:10: \
+error: 'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n \
+MLDDECL( mldlg_result, MLRequest_win, ( MLEnvironment ep, const char *prompt, \
+char *response, long n));\\n          ^~~~~~~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:800:47: note: \
+in definition of macro 'MLCBDECL'\\n #define MLCBDECL( rtype, name, params) \
+extern rtype MLCB name P(params)\\n                                           \
+    ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5372:1: note: \
+in expansion of macro 'MLDDECL'\\n MLDDECL( mldlg_result, MLRequest_win, ( \
+MLEnvironment ep, const char *prompt, char *response, long n));\\n \
+^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5373:10: \
+error: 'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n \
+MLDDECL( mldlg_result, MLConfirm_win, ( MLEnvironment ep, const char \
+*okcancelquest, mldlg_result default_answer));\\n          \
+^~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\
+\\\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:800:47: note: in definition of macro \
+'MLCBDECL'\\n #define MLCBDECL( rtype, name, params) extern rtype MLCB name \
+P(params)\\n                                               \
+^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5373:1: note: \
+in expansion of macro 'MLDDECL'\\n MLDDECL( mldlg_result, MLConfirm_win, ( \
+MLEnvironment ep, const char *okcancelquest, mldlg_result \
+default_answer));\\n ^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5374:10: \
+error: 'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n \
+MLDDECL( mldlg_result, MLPermit_win,  ( MLEnvironment ep, mldlg_result \
+wait));\\n          ^~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:800:47: note: \
+in definition of macro 'MLCBDECL'\\n #define MLCBDECL( rtype, name, params) \
+extern rtype MLCB name P(params)\\n                                           \
+    ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5374:1: note: \
+in expansion of macro 'MLDDECL'\\n MLDDECL( mldlg_result, MLPermit_win,  ( \
+MLEnvironment ep, mldlg_result wait));\\n ^~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5448:10: \
+error: 'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n \
+MLDDECL( mldlg_result, default_request_argv, ( MLEnvironment ep, char **argv, \
+long len, char *buff, long size));\\n          ^~~~~~~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:800:47: note: \
+in definition of macro 'MLCBDECL'\\n #define MLCBDECL( rtype, name, params) \
+extern rtype MLCB name P(params)\\n                                           \
+    ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5448:1: note: \
+in expansion of macro 'MLDDECL'\\n MLDDECL( mldlg_result, \
+default_request_argv, ( MLEnvironment ep, char **argv, long len, char *buff, \
+long size));\\n ^~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5457:9: error: \
+'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n MLDECL( \
+mldlg_result,  MLAlert,             ( MLEnvironment env, const char \
+*message));\\n         ^~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\
+\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\
+\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:777:45: note: in definition \
+of macro 'MLDECL'\\n #define MLDECL( rtype, name, params) extern rtype MLAPI \
+name P(params)\\n                                             \
+^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5458:9: error: \
+'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n MLDECL( \
+mldlg_result,  MLRequest,           ( MLEnvironment env, const char *prompt, \
+char *response, long sizeof_response)); /* initialize response with default*/\
+\\n         ^~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:777:45: note: \
+in definition of macro 'MLDECL'\\n #define MLDECL( rtype, name, params) \
+extern rtype MLAPI name P(params)\\n                                          \
+   ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5459:9: error: \
+'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n MLDECL( \
+mldlg_result,  MLConfirm,           ( MLEnvironment env, const char \
+*question, mldlg_result default_answer));\\n         \
+^~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\\\\12.1\
+\\\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-64\\\\\
+CompilerAdditions/mathlink.h:777:45: note: in definition of macro 'MLDECL'\\n \
+#define MLDECL( rtype, name, params) extern rtype MLAPI name P(params)\\n     \
+                                        ^~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5460:9: error: \
+'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n MLDECL( \
+mldlg_result,  MLRequestArgv,       ( MLEnvironment env, char **argv, long \
+cardof_argv, char *buff, long size));\\n         ^~~~~~~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:777:45: note: \
+in definition of macro 'MLDECL'\\n #define MLDECL( rtype, name, params) \
+extern rtype MLAPI name P(params)\\n                                          \
+   ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5462:9: error: \
+'mldlg_result' does not name a type; did you mean 'mlapi_result'?\\n MLDECL( \
+mldlg_result,  MLRequestToInteract, ( MLEnvironment env, mldlg_result \
+wait_for_permission));\\n         ^~~~~~~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:777:45: note: \
+in definition of macro 'MLDECL'\\n #define MLDECL( rtype, name, params) \
+extern rtype MLAPI name P(params)\\n                                          \
+   ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5463:71: \
+error: 'MLDialogFunctionType' has not been declared\\n MLDECL( int,  \
+MLSetDialogFunction, ( MLEnvironment env, long funcnum, MLDialogFunctionType \
+func));\\n                                                                    \
+   ^~~~~~~~~~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:546:14: note: \
+in definition of macro 'P'\\n #define P(s) s\\n              \
+^\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5463:1: note: \
+in expansion of macro 'MLDECL'\\n MLDECL( int,  MLSetDialogFunction, ( \
+MLEnvironment env, long funcnum, MLDialogFunctionType func));\\n \
+^~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5466:9: error: \
+'MLDialogProcPtr' does not name a type; did you mean 'MLYielderProcPtr'?\\n \
+MLDECL( MLDialogProcPtr, MLAlertCast, ( MLAlertProcPtr f));\\n         \
+^~~~~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:777:45: note: \
+in definition of macro 'MLDECL'\\n #define MLDECL( rtype, name, params) \
+extern rtype MLAPI name P(params)\\n                                          \
+   ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5467:9: error: \
+'MLDialogProcPtr' does not name a type; did you mean 'MLYielderProcPtr'?\\n \
+MLDECL( MLDialogProcPtr, MLRequestCast, ( MLRequestProcPtr f));\\n         \
+^~~~~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:777:45: note: \
+in definition of macro 'MLDECL'\\n #define MLDECL( rtype, name, params) \
+extern rtype MLAPI name P(params)\\n                                          \
+   ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5468:9: error: \
+'MLDialogProcPtr' does not name a type; did you mean 'MLYielderProcPtr'?\\n \
+MLDECL( MLDialogProcPtr, MLConfirmCast, ( MLConfirmProcPtr f));\\n         \
+^~~~~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:777:45: note: \
+in definition of macro 'MLDECL'\\n #define MLDECL( rtype, name, params) \
+extern rtype MLAPI name P(params)\\n                                          \
+   ^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5469:9: error: \
+'MLDialogProcPtr' does not name a type; did you mean 'MLYielderProcPtr'?\\n \
+MLDECL( MLDialogProcPtr, MLRequestArgvCast, ( MLRequestArgvProcPtr f));\\n    \
+     ^~~~~~~~~~~~~~~\\nC:\\\\Program Files\\\\Wolfram Research\\\\Mathematica\
+\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\DeveloperKit\\\\Windows-x86-\
+64\\\\CompilerAdditions/mathlink.h:777:45: note: in definition of macro \
+'MLDECL'\\n #define MLDECL( rtype, name, params) extern rtype MLAPI name \
+P(params)\\n                                             \
+^~~~~\\nC:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:5470:9: error: \
+'MLDialogProcPtr' does not name a type; did you mean 'MLYielderProcPtr'?\\n \
+MLDECL( MLDialogProcPtr, MLRequestToInteractCast, ( \
+MLRequestToInteractProcPtr f));\\n         ^~~~~~~~~~~~~~~\\nC:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions/mathlink.h:777:45: note: \
+in definition of macro 'MLDECL'\\n #define MLDECL( rtype, name, params) \
+extern rtype MLAPI name P(params)\\n                                          \
+   ^~~~~\\nIn file included from D:\\\\gitrepos\\\\golib-interface\\\\draft\\\
+\\LTemplate-DemoLib.cpp:6:\\nC:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\\
+Mathematica\\\\Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.h: In \
+function 'mint \
+mma::detail::libraryType()':\\nC:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\\
+Mathematica\\\\Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.h:280:5: \
+warning: no return statement in function returning non-void \
+[-Wreturn-type]\\n     }\\n     \
+^\\nC:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\\
+Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.h: In function \
+'rawarray_t \
+mma::detail::libraryRawType()':\\nC:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\
+\\\\Mathematica\\\\Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.h:1048:\
+5: warning: no return statement in function returning non-void \
+[-Wreturn-type]\\n     }\\n     \
+^\\nC:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\\
+Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.h: In function \
+'numericarray_data_t \
+mma::detail::libraryNumericType()':\\nC:\\\\Users\\\\Silvia\\\\AppData\\\\\
+Roaming\\\\Mathematica\\\\Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.\
+h:1290:5: warning: no return statement in function returning non-void \
+[-Wreturn-type]\\n     }\\n     \
+^\\nC:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\\
+Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.h: In function \
+'imagedata_t \
+mma::detail::libraryImageType()':\\nC:\\\\Users\\\\Silvia\\\\AppData\\\\\
+Roaming\\\\Mathematica\\\\Applications\\\\LTemplate\\\\IncludeFiles/LTemplate.\
+h:1585:5: warning: no return statement in function returning non-void \
+[-Wreturn-type]\\n     }\\n     ^\"\>",
+    StripOnInput->False,
+    LineBreakWithin->False,
+    LineColor->GrayLevel[1],
+    FrontFaceColor->GrayLevel[1],
+    BackFaceColor->GrayLevel[1],
+    GraphicsColor->GrayLevel[1],
+    FontColor->GrayLevel[1]]], "Program",
+   PageWidth:>DirectedInfinity[1],
+   FontSize->8,ExpressionUUID->"5da440ed-5d8b-4716-9f39-2f34160b48d3"],
+  ImageSize->{983.0000000000002, 1968.2000000000012`},
+  ScrollPosition->{0., 2659.974999999999},
+  Scrollbars->True]], "Output",ExpressionUUID->"4d981ae2-f132-447e-b4ba-\
+daab0fc95e84"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CreateLibrary", "cmperr", 
+   "\"Compile error: \\!\\(\\*RowBox[{\\\"\\\\\\\"C:\\\\\\\\\\\\\\\\Program \
+Files\\\\\\\\\\\\\\\\Wolfram \
+Research\\\\\\\\\\\\\\\\Mathematica\\\\\\\\\\\\\\\\12.1\\\\\\\\\\\\\\\\\
+SystemFiles\\\\\\\\\\\\\\\\Links\\\\\\\\\\\\\\\\MathLink\\\\\\\\\\\\\\\\\
+DeveloperKit\\\\\\\\\\\\\\\\Windows-x86-64\\\\\\\\\\\\\\\\CompilerAdditions/\
+mathlink.h:641:9: error: '__int64' does not name a type; did you mean \
+'wint64'?\\\\\\\"\\\"}]\\)\"", 2, 18, 5, 19048918176488137940, "Local", 
+   "CCompilerDriver`CreateLibrary"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"ecceaaf9-b825-43b1-bd6b-a783e96b9345"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CreateLibrary", "cmperr", 
+   "\"Compile error: \\!\\(\\*RowBox[{\\\"\\\\\\\"C:\\\\\\\\\\\\\\\\Program \
+Files\\\\\\\\\\\\\\\\Wolfram \
+Research\\\\\\\\\\\\\\\\Mathematica\\\\\\\\\\\\\\\\12.1\\\\\\\\\\\\\\\\\
+SystemFiles\\\\\\\\\\\\\\\\Links\\\\\\\\\\\\\\\\MathLink\\\\\\\\\\\\\\\\\
+DeveloperKit\\\\\\\\\\\\\\\\Windows-x86-64\\\\\\\\\\\\\\\\CompilerAdditions/\
+mathlink.h:642:9: error: '__int64' does not name a type; did you mean \
+'wint64'?\\\\\\\"\\\"}]\\)\"", 2, 18, 6, 19048918176488137940, "Local", 
+   "CCompilerDriver`CreateLibrary"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"b325f4c9-278e-41c7-b961-2cd137b2dcd0"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CreateLibrary", "cmperr", 
+   "\"Compile error: \\!\\(\\*RowBox[{\\\"\\\\\\\"C:\\\\\\\\\\\\\\\\Program \
+Files\\\\\\\\\\\\\\\\Wolfram \
+Research\\\\\\\\\\\\\\\\Mathematica\\\\\\\\\\\\\\\\12.1\\\\\\\\\\\\\\\\\
+SystemFiles\\\\\\\\\\\\\\\\Links\\\\\\\\\\\\\\\\MathLink\\\\\\\\\\\\\\\\\
+DeveloperKit\\\\\\\\\\\\\\\\Windows-x86-64\\\\\\\\\\\\\\\\CompilerAdditions/\
+mathlink.h:643:26: error: expected initializer before \
+'mluint64'\\\\\\\"\\\"}]\\)\"", 2, 18, 7, 19048918176488137940, "Local", 
+   "CCompilerDriver`CreateLibrary"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"4ab4bf11-1057-49d5-9ff5-fa3d4a47caf1"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"CreateLibrary\\\", \
+\\\"::\\\", \\\"cmperr\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 18, 8, 19048918176488137940, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellLabel->
+  "5/13/20 00:52:28 During evaluation of \
+In[18]:=",ExpressionUUID->"8909b8a8-effa-4681-b0fc-c0842cfa17bf"],
+
+Cell[BoxData["$Failed"], "Output",
+ CellLabel->
+  "5/13/20 00:52:28 \
+Out[18]=",ExpressionUUID->"44fd1000-d953-4d6f-b214-27e7a5f5eb7a"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"?", "CompileTemplate"}]], "tempInput",
+ CellLabel->
+  "5/13/20 00:47:45 \
+In[15]:=",ExpressionUUID->"159e130a-097e-4822-8fd8-909085ee628f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\"\<LTemplate-demo-src\>\"", "//", 
+  RowBox[{"pipe", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pipe", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Cells", "[", 
+        RowBox[{"CellTags", "\[Rule]", "#"}], "]"}], "&"}], ",", "Last", ",", 
+      "NotebookRead", ",", "First"}], "]"}], "\[IndentingNewLine]", ",", 
+    RowBox[{
+     RowBox[{"CreateLibrary", "[", 
+      RowBox[{
+      "#", "\[IndentingNewLine]", ",", "\"\<LT_addtwo\>\"", 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"\"\<IncludeDirectories\>\"", "\[Rule]", 
+        RowBox[{
+        "{", "\"\<D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\inc\>\"", 
+         "}"}]}]}], "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{",", 
+        RowBox[{"Language", "\[Rule]", "\"\<C++\>\""}], "\[IndentingNewLine]",
+         ",", 
+        RowBox[{"\"\<CompileOptions\>\"", "\[Rule]", "\"\<-std=c++17\>\""}]}],
+        "*)"}], "\[IndentingNewLine]", "]"}], "&"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",ExpressionUUID->"c93e1339-434b-4c0e-9096-904c02b2df5d"],
+
+Cell[BoxData[
+ PaneBox[Cell[BoxData[
+   StyleBox["\<\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\
+\\SystemFiles\\\\LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-\
+12108-10468-22>C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\\mingw64\\\\bin\\\\\
+gcc.exe -shared -o \
+\\\"C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\
+\\\\LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-12108-10468-22\\\
+\\wll_multiply.dll\\\" -O2  -I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\IncludeFiles\\\\C\\\" \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" \
+-I\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\inc\\\" \\\"C:\\\\Users\\\
+\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\\\\\
+LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-12108-10468-22\\\\\
+wll_multiply.c\\\"  -L\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Libraries\\\\Windows-x86-64\
+\\\"    2>&1 \\nIn file included from \
+C:\\\\Users\\\\Silvia\\\\AppData\\\\Roaming\\\\Mathematica\\\\SystemFiles\\\\\
+LibraryResources\\\\Windows-x86-64\\\\Working-flerkengen1-12108-10468-22\\\\\
+wll_multiply.c:1:\\nD:\\\\gitrepos\\\\golib-interface\\\\draft\\\\inc/wll_\
+interface.h:8:10: fatal error: cassert: No such file or directory\\n #include \
+<cassert>\\n          ^~~~~~~~~\\ncompilation terminated.\"\>",
+    StripOnInput->False,
+    LineBreakWithin->False,
+    LineColor->GrayLevel[1],
+    FrontFaceColor->GrayLevel[1],
+    BackFaceColor->GrayLevel[1],
+    GraphicsColor->GrayLevel[1],
+    FontColor->GrayLevel[1]]], "Program",
+   PageWidth:>DirectedInfinity[1],
+   FontSize->8,ExpressionUUID->"0ad77f05-fb65-4f8e-879c-6ba3a8cdb579"],
+  ImageSize->{500, Automatic},
+  Scrollbars->True]], "Output",ExpressionUUID->"fbbabf79-0189-48a9-abac-\
+8d20911c07c4"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CreateLibrary", "cmperr", 
+   "\"Compile error: \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\\\\\\\\\\gitrepos\\\\\\\\\\\\\\\\golib-\
+interface\\\\\\\\\\\\\\\\draft\\\\\\\\\\\\\\\\inc/wll_interface.h:8:10: fatal \
+error: cassert: No such file or directory\\\\\\\"\\\"}]\\)\"", 2, 78, 19, 
+   19048858217763697533, "Local", "CCompilerDriver`CreateLibrary"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->
+  "5/12/20 22:48:06 During evaluation of \
+In[78]:=",ExpressionUUID->"9d2f806a-29e1-40c1-af3f-18eea11aee36"],
+
+Cell[BoxData["$Failed"], "Output",
+ CellLabel->
+  "5/12/20 22:48:06 \
+Out[78]=",ExpressionUUID->"a6fd6e68-b7c1-40aa-ae0a-ceedb7148fc8"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["wll", "Input"],
+ " requires ",
+ StyleBox["cassert.h", "Input"],
+ " etc., which are not included in ",
+ StyleBox["gcc", "Input"],
+ "."
+}], "Comment",ExpressionUUID->"c88ba5e1-89e6-4bcf-8938-d999f02f9a6b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Demo: import GoLang function", "Subsubsection",ExpressionUUID->"829e7fda-9131-46b5-947a-875b21bcf298"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+   "\"\<tcc\>\"", ",", "\"\<-impdef\>\"", "\[IndentingNewLine]", ",", 
+    "\"\<libgoutil.dll\>\"", "\[IndentingNewLine]", ",", "\"\<-o\>\"", ",", 
+    "\"\<libgoutil.def\>\""}], "\[IndentingNewLine]", "}"}], "//", 
+  "safePs"}]], "tempInput",
+ CellLabel->
+  "5/12/20 22:11:30 \
+In[51]:=",ExpressionUUID->"acac9daa-67e7-4e36-857d-8d8828b4e63b"],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{"\<\"ExitCode\"\>", "\[Rule]", "0"}], ",", 
+   RowBox[{"\<\"StandardOutput\"\>", "\[Rule]", "\<\"\"\>"}], ",", 
+   RowBox[{"\<\"StandardError\"\>", "\[Rule]", "\<\"\"\>"}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellLabel->
+  "5/12/20 22:11:30 \
+Out[51]=",ExpressionUUID->"4a21df03-f90d-439d-8262-f737bac01a39"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CreateLibrary", "[", "\[IndentingNewLine]", 
+  RowBox[{
+  "\"\<main.c\>\"", "\[IndentingNewLine]", ",", "\"\<liblink_GoTest_gcc\>\"", 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"\"\<TargetDirectory\>\"", "\[Rule]", "\"\<Division\>\""}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"\"\<Libraries\>\"", "\[Rule]", 
+    RowBox[{"{", "\"\<libgoutil.dll\>\"", "}"}]}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellLabel->
+  "5/12/20 22:03:14 \
+In[48]:=",ExpressionUUID->"9043e9b3-1752-4105-85df-9f8b4b953bb9"],
+
+Cell[BoxData[
+ PaneBox[Cell[BoxData[
+   StyleBox["\<\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\\
+Working-flerkengen1-12108-10468-6>C:\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh\\\
+\\mingw64\\\\bin\\\\gcc.exe -shared -o \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\Working-\
+flerkengen1-12108-10468-6\\\\liblink_GoTest_gcc.dll\\\" -O2  \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\IncludeFiles\\\\C\\\" \
+-I\\\"C:\\\\Program Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" \
+\\\"D:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\Working-\
+flerkengen1-12108-10468-6\\\\liblink_GoTest_gcc.c\\\"  -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Links\\\\MathLink\\\\\
+DeveloperKit\\\\Windows-x86-64\\\\CompilerAdditions\\\" -L\\\"C:\\\\Program \
+Files\\\\Wolfram \
+Research\\\\Mathematica\\\\12.1\\\\SystemFiles\\\\Libraries\\\\Windows-x86-64\
+\\\"  -l\\\"libgoutil.dll\\\"  2>&1 \
+\\nD:\\\\gitrepos\\\\golib-interface\\\\draft\\\\Division\\\\Working-\
+flerkengen1-12108-10468-6\\\\liblink_GoTest_gcc.c:1:5: error: expected '=', \
+',', ';', 'asm' or '__attribute__' before '.' token\\n main.c\\n     ^\"\>",
+    StripOnInput->False,
+    LineBreakWithin->False,
+    LineColor->GrayLevel[1],
+    FrontFaceColor->GrayLevel[1],
+    BackFaceColor->GrayLevel[1],
+    GraphicsColor->GrayLevel[1],
+    FontColor->GrayLevel[1]]], "Program",
+   PageWidth:>DirectedInfinity[1],
+   FontSize->8,ExpressionUUID->"ecf07b14-b3b2-4ba8-b66d-c9e0ea00cd76"],
+  ImageSize->{500, Automatic},
+  ScrollPosition->{0., 0.},
+  Scrollbars->True]], "Output",ExpressionUUID->"43c907db-55cd-4784-a737-\
+d766bcd148c0"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "CreateLibrary", "cmperr", 
+   "\"Compile error: \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\\\\\\\\\\gitrepos\\\\\\\\\\\\\\\\golib-\
+interface\\\\\\\\\\\\\\\\draft\\\\\\\\\\\\\\\\Division\\\\\\\\\\\\\\\\Working-\
+flerkengen1-12108-10468-6\\\\\\\\\\\\\\\\liblink_GoTest_gcc.c:1:5: error: \
+expected '=', ',', ';', 'asm' or '__attribute__' before '.' \
+token\\\\\\\"\\\"}]\\)\"", 2, 48, 2, 19048858217763697533, "Local", 
+   "CCompilerDriver`CreateLibrary"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellLabel->
+  "5/12/20 22:03:14 During evaluation of \
+In[48]:=",ExpressionUUID->"ebb23cf7-d1c6-484a-bc79-33d49d7efe33"],
+
+Cell[BoxData["$Failed"], "Output",
+ CellLabel->
+  "5/12/20 22:03:14 \
+Out[48]=",ExpressionUUID->"19ab7079-9863-46f0-b8cd-b4db31dde4d1"]
+}, Open  ]],
+
+Cell[TextData[{
+ "List all exported functions in DLL using ",
+ StyleBox["tcc -impdef", "Program"],
+ " :"
+}], "Text",ExpressionUUID->"689ebfa5-18fe-4096-819b-c11cd140ffa4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+   "\"\<tcc\>\"", ",", "\"\<-impdef\>\"", "\[IndentingNewLine]", ",", 
+    "\"\<Division\\\\liblink_Division_gcc.dll\>\"", "\[IndentingNewLine]", 
+    ",", "\"\<-o\>\"", ",", "\"\<Division\\\\liblink_Division_gcc.def\>\""}], 
+   "\[IndentingNewLine]", "}"}], "//", "safePs"}]], "tempInput",
+ CellLabel->
+  "5/12/20 21:30:43 \
+In[31]:=",ExpressionUUID->"83896301-6490-4601-96e5-893c3b6d19c8"],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{"\<\"ExitCode\"\>", "\[Rule]", "0"}], ",", 
+   RowBox[{"\<\"StandardOutput\"\>", "\[Rule]", "\<\"\"\>"}], ",", 
+   RowBox[{"\<\"StandardError\"\>", "\[Rule]", "\<\"\"\>"}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellLabel->
+  "5/12/20 21:30:43 \
+Out[31]=",ExpressionUUID->"f2a35625-3c2e-454a-bccb-1493d90e7178"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Import", "[", 
+   RowBox[{
+   "\"\<Division\\\\liblink_Division_gcc.def\>\"", ",", "\"\<Lines\>\""}], 
+   "]"}], "//", "Multicolumn"}]], "tempInput",
+ CellLabel->
+  "5/12/20 21:30:58 \
+In[32]:=",ExpressionUUID->"0b61488b-6aa0-48f7-9383-8dbbeb644358"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"LIBRARY liblink_Division_gcc.dll\"\>", "\<\"Division\"\>", \
+"\<\"WolframLibrary_uninitialize\"\>"},
+    {"\<\"\"\>", "\<\"WolframLibrary_getVersion\"\>", ""},
+    {"\<\"EXPORTS\"\>", "\<\"WolframLibrary_initialize\"\>", ""}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellLabel->
+  "5/12/20 21:30:58 \
+Out[32]=",ExpressionUUID->"f3ffdd02-8ba5-4a1e-b272-60269c8bdf8d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Block", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"$LibraryPath", "=", 
+     RowBox[{"$LibraryPath", "~", "Append", "~", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Directory", "[", "]"}], ",", "\"\<Division\>\""}], "}"}], 
+       "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"func", "=", 
+    RowBox[{"LibraryFunctionLoad", "[", 
+     RowBox[{
+     "\"\<liblink_Division_gcc.dll\>\"", "\[IndentingNewLine]", ",", 
+      "\"\<Division\>\"", ",", 
+      RowBox[{"{", 
+       RowBox[{"Real", ",", "Real"}], "}"}], ",", "Real"}], 
+     "\[IndentingNewLine]", "]"}]}]}], "]"}]], "Input",
+ CellLabel->
+  "5/12/20 21:56:33 \
+In[38]:=",ExpressionUUID->"920ec482-be14-43ec-a0c2-54a7535d111c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox["LibraryFunction",
+    "SummaryHead"], "[", 
+   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready"}, 
+    TemplateBox[{
+      PaneSelectorBox[{False -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource[
+               "FEBitmaps", "SquarePlusIconMedium"]], 
+              ButtonFunction :> (Typeset`open$$ = True), Appearance -> None, 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
+            GraphicsBox[{
+              Thickness[0.038461538461538464`], {
+               FaceForm[{
+                 GrayLevel[0.93], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{1, 4, 3}, {0, 1, 0}, {1, 3, 3}, {0, 1, 0}, {
+                1, 3, 3}, {0, 1, 0}, {1, 3, 3}, {0, 1, 0}}}, {{{
+                25.499999999999996`, 2.5}, {25.499999999999996`, 
+                1.3953100000000003`}, {24.604699999999998`, 
+                0.49999999999999994`}, {23.5, 0.49999999999999994`}, {2.5, 
+                0.49999999999999994`}, {1.3953100000000003`, 
+                0.49999999999999994`}, {0.49999999999999994`, 
+                1.3953100000000003`}, {0.49999999999999994`, 2.5}, {
+                0.49999999999999994`, 23.5}, {0.49999999999999994`, 
+                24.604699999999998`}, {1.3953100000000003`, 
+                25.499999999999996`}, {2.5, 25.499999999999996`}, {23.5, 
+                25.499999999999996`}, {24.604699999999998`, 
+                25.499999999999996`}, {25.499999999999996`, 
+                24.604699999999998`}, {25.499999999999996`, 23.5}, {
+                25.499999999999996`, 2.5}}}]}, {
+               FaceForm[{
+                 RGBColor[0.5, 0.5, 0.5], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{20.5426, 
+                19.116799999999998`}, {16.3832, 21.876199999999997`}, {
+                16.3832, 20.021499999999996`}, {6.930469999999999, 
+                20.021499999999996`}, {6.930469999999999, 
+                18.212100000000003`}, {16.3832, 18.212100000000003`}, {
+                16.3832, 16.357399999999995`}, {20.5426, 
+                19.116799999999998`}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{5.30508, 13.8391}, {
+                9.46445, 11.079700000000003`}, {9.46445, 
+                12.933999999999997`}, {18.917199999999998`, 
+                12.933999999999997`}, {18.917199999999998`, 14.7438}, {
+                9.46445, 14.7438}, {9.46445, 16.598}, {5.30508, 13.8391}}}], 
+               
+               FilledCurveBox[{{{1, 4, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {
+                0, 1, 0}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 
+                3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {0, 1, 0}, {1, 3, 3}, {1,
+                 3, 3}, {1, 3, 3}, {1, 3, 3}}}, CompressedData["
+1:eJxTTMoPSmVmYGBgBGJjIGYCYq4u+eR3VWoOxhkv5j+Qk3SA8fu/r5rKOVHM
+Yd2vmNyjZ9Qcrt9QXbW9S8RBg59767IidQcPMYPGaHFhB+Nn61SfiGo4xBwp
+T7o2V9Dh0Iolfg6/NBxEHv/x1Xgi4FB1XNNqkqQWnP+axUTQjFkbzn+oO2HB
+j/3aDg/Xn5T6WiDoYLs3aJpiqI7DrHN+bO6tQg4zfUR7vF7pQOyfIQyRd9d1
+WLL0U1kLoyjEPdm6DpoTXfQX7xBzKPjQejLkhDacL5J4+LL2Gm2HtNnSl4Vf
+iELM69J2qPZM3tLnJerQX1oozZugDfHPUxGI/4W1HQ5p3TthoyDi4D7lG1v8
+Mi2HgqL9zoEHhB1inOxe3BRG8MH62zXhfIbN1Z82CGhC/GMg4nCm3mN/7TYN
+iHlCUPdGakDc/1kUEr46GhD/eYnD+d9iBf/kC0vC+TuCrSL+X5Vy2HGR4R5T
+uAbEfxYykPBYp+HQqsCuesZAFhL+rJoQ/2rIQdxTpwkJ7yVycPfD+GDzVqLx
+xbUd5HYt2JfqBdWfpA2Jj9mykPDpgYaXtaxDy7yzq86vg8qvlIHE5ylY/Eo7
+XAt7o787TxfOB5ufqesQ9PbyxxkPZSDhZ6nrMAGU3u7LQtLLEx2HN2253UbX
+ofZ76jis/Pay4oynAsT8QG0HKZMv/gW7FCDyTFpwPsz/MD44/Mw1HFjb1uR9
+TVVwWKy880/7FHWIexrkIfLX1RzOMDZZVjHIOaDkh3vSDuj5AwCF11Vc
+                "]]}}, Background -> GrayLevel[0.93], Axes -> False, 
+             AspectRatio -> 1, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}], Frame -> True, 
+             FrameTicks -> None, FrameStyle -> Directive[
+               Thickness[Tiny], 
+               GrayLevel[0.7]]], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Function name: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"Division\"", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Argument count: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["2", "SummaryItem"]}]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}], True -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource[
+               "FEBitmaps", "SquareMinusIconMedium"]], 
+              ButtonFunction :> (Typeset`open$$ = False), Appearance -> None, 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
+            GraphicsBox[{
+              Thickness[0.038461538461538464`], {
+               FaceForm[{
+                 GrayLevel[0.93], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{1, 4, 3}, {0, 1, 0}, {1, 3, 3}, {0, 1, 0}, {
+                1, 3, 3}, {0, 1, 0}, {1, 3, 3}, {0, 1, 0}}}, {{{
+                25.499999999999996`, 2.5}, {25.499999999999996`, 
+                1.3953100000000003`}, {24.604699999999998`, 
+                0.49999999999999994`}, {23.5, 0.49999999999999994`}, {2.5, 
+                0.49999999999999994`}, {1.3953100000000003`, 
+                0.49999999999999994`}, {0.49999999999999994`, 
+                1.3953100000000003`}, {0.49999999999999994`, 2.5}, {
+                0.49999999999999994`, 23.5}, {0.49999999999999994`, 
+                24.604699999999998`}, {1.3953100000000003`, 
+                25.499999999999996`}, {2.5, 25.499999999999996`}, {23.5, 
+                25.499999999999996`}, {24.604699999999998`, 
+                25.499999999999996`}, {25.499999999999996`, 
+                24.604699999999998`}, {25.499999999999996`, 23.5}, {
+                25.499999999999996`, 2.5}}}]}, {
+               FaceForm[{
+                 RGBColor[0.5, 0.5, 0.5], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{20.5426, 
+                19.116799999999998`}, {16.3832, 21.876199999999997`}, {
+                16.3832, 20.021499999999996`}, {6.930469999999999, 
+                20.021499999999996`}, {6.930469999999999, 
+                18.212100000000003`}, {16.3832, 18.212100000000003`}, {
+                16.3832, 16.357399999999995`}, {20.5426, 
+                19.116799999999998`}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{5.30508, 13.8391}, {
+                9.46445, 11.079700000000003`}, {9.46445, 
+                12.933999999999997`}, {18.917199999999998`, 
+                12.933999999999997`}, {18.917199999999998`, 14.7438}, {
+                9.46445, 14.7438}, {9.46445, 16.598}, {5.30508, 13.8391}}}], 
+               
+               FilledCurveBox[{{{1, 4, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {
+                0, 1, 0}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 
+                3}, {1, 3, 3}, {1, 3, 3}, {1, 3, 3}, {0, 1, 0}, {1, 3, 3}, {1,
+                 3, 3}, {1, 3, 3}, {1, 3, 3}}}, CompressedData["
+1:eJxTTMoPSmVmYGBgBGJjIGYCYq4u+eR3VWoOxhkv5j+Qk3SA8fu/r5rKOVHM
+Yd2vmNyjZ9Qcrt9QXbW9S8RBg59767IidQcPMYPGaHFhB+Nn61SfiGo4xBwp
+T7o2V9Dh0Iolfg6/NBxEHv/x1Xgi4FB1XNNqkqQWnP+axUTQjFkbzn+oO2HB
+j/3aDg/Xn5T6WiDoYLs3aJpiqI7DrHN+bO6tQg4zfUR7vF7pQOyfIQyRd9d1
+WLL0U1kLoyjEPdm6DpoTXfQX7xBzKPjQejLkhDacL5J4+LL2Gm2HtNnSl4Vf
+iELM69J2qPZM3tLnJerQX1oozZugDfHPUxGI/4W1HQ5p3TthoyDi4D7lG1v8
+Mi2HgqL9zoEHhB1inOxe3BRG8MH62zXhfIbN1Z82CGhC/GMg4nCm3mN/7TYN
+iHlCUPdGakDc/1kUEr46GhD/eYnD+d9iBf/kC0vC+TuCrSL+X5Vy2HGR4R5T
+uAbEfxYykPBYp+HQqsCuesZAFhL+rJoQ/2rIQdxTpwkJ7yVycPfD+GDzVqLx
+xbUd5HYt2JfqBdWfpA2Jj9mykPDpgYaXtaxDy7yzq86vg8qvlIHE5ylY/Eo7
+XAt7o787TxfOB5ufqesQ9PbyxxkPZSDhZ6nrMAGU3u7LQtLLEx2HN2253UbX
+ofZ76jis/Pay4oynAsT8QG0HKZMv/gW7FCDyTFpwPsz/MD44/Mw1HFjb1uR9
+TVVwWKy880/7FHWIexrkIfLX1RzOMDZZVjHIOaDkh3vSDuj5AwCF11Vc
+                "]]}}, Background -> GrayLevel[0.93], Axes -> False, 
+             AspectRatio -> 1, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}], Frame -> True, 
+             FrameTicks -> None, FrameStyle -> Directive[
+               Thickness[Tiny], 
+               GrayLevel[0.7]]], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Function name: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"Division\"", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Argument count: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["2", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Argument types: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  PaneBox[
+                   RowBox[{"{", 
+                    RowBox[{"Real", ",", "Real"}], "}"}], 
+                   ImageSize -> {{1, 500}, Automatic}, BaselinePosition -> 
+                   Baseline, ContentPadding -> False, FrameMargins -> 0, 
+                   StripOnInput -> True], "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Return type: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  PaneBox[
+                  "Real", ImageSize -> {{1, 500}, Automatic}, 
+                   BaselinePosition -> Baseline, ContentPadding -> False, 
+                   FrameMargins -> 0, StripOnInput -> True], 
+                  "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Library: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"liblink_Division_gcc.dll\"", "SummaryItem"]}]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}]}, 
+       Dynamic[Typeset`open$$], ImageSize -> Automatic]},
+     "SummaryPanel"],
+    DynamicModuleValues:>{}], "]"}],
+  LibraryFunction[
+  "D:\\gitrepos\\golib-interface\\draft\\Division\\liblink_Division_gcc.dll", 
+   "Division", {Real, Real}, Real],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellLabel->
+  "5/12/20 21:56:33 \
+Out[38]=",ExpressionUUID->"4ba7af10-2003-460d-9f4a-9622fb6c0b52"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"LibraryFunctionInformation", "[", "func", "]"}], "//", 
+     "Association"}], "//", 
+    RowBox[{"MapAt", "[", 
+     RowBox[{"FileNameTake", ",", "\"\<File\>\""}], "]"}]}], "//", 
+   "Dataset"}], "//", "DatasetGrid"}]], "tempInput",
+ CellLabel->
+  "5/12/20 21:57:10 \
+In[41]:=",ExpressionUUID->"d49e2623-14d8-42b3-953c-ddfa1066ff1e"],
+
+Cell[BoxData[
+ StyleBox[
+  TagBox[GridBox[{
+     {
+      ItemBox[
+       PaneBox["\<\"ReturnType\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{1, Full}, Automatic}],
+       Alignment->{Left, Baseline},
+       Background->GrayLevel[0.95],
+       StripOnInput->False], 
+      ItemBox[
+       PaneBox[
+        StyleBox["Real",
+         ShowStringCharacters->True,
+         FontFamily->"Source Code Pro"],
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{60, Full}, Automatic}],
+       ItemSize->{Full, Automatic},
+       StripOnInput->False]},
+     {
+      ItemBox[
+       PaneBox["\<\"ArgumentTypes\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{1, Full}, Automatic}],
+       Alignment->{Left, Baseline},
+       Background->GrayLevel[0.95],
+       StripOnInput->False], 
+      ItemBox[
+       PaneBox[
+        StyleBox[
+         RowBox[{"{", 
+          RowBox[{"Real", ",", "Real"}], "}"}],
+         StripOnInput->False,
+         ShowStringCharacters->False],
+        ImageMargins->{{5, 3}, {4, 5}}],
+       StripOnInput->False]},
+     {
+      ItemBox[
+       PaneBox["\<\"File\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{1, Full}, Automatic}],
+       Alignment->{Left, Baseline},
+       Background->GrayLevel[0.95],
+       StripOnInput->False], 
+      ItemBox[
+       PaneBox["\<\"liblink_Division_gcc.dll\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{230.40000000000003`, Full}, Automatic}],
+       ItemSize->{Full, Automatic},
+       StripOnInput->False]},
+     {
+      ItemBox[
+       PaneBox["\<\"Function\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{1, Full}, Automatic}],
+       Alignment->{Left, Baseline},
+       Background->GrayLevel[0.95],
+       StripOnInput->False], 
+      ItemBox[
+       PaneBox["\<\"Division\"\>",
+        ImageMargins->{{5, 3}, {4, 5}},
+        ImageSize->{{76.80000000000001, Full}, Automatic}],
+       ItemSize->{Full, Automatic},
+       StripOnInput->False]}
+    },
+    AutoDelete->False,
+    BaseStyle->{FontFamily -> "Verdana", FontSize -> 12},
+    FrameStyle->GrayLevel[0.7490196078431373],
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{0}}, "Rows" -> {{0}}}],
+   "Grid"],
+  StripOnInput->False,
+  ShowAutoStyles->False,
+  NumberMarks->False,
+  LineBreakWithin->False]], "Output",
+ CellLabel->
+  "5/12/20 21:57:10 \
+Out[41]=",ExpressionUUID->"d9b32560-d816-4f66-865f-d22bf771a399"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"branch", "[", 
+     RowBox[{"func", ",", "Divide"}], "]"}], "@@@", 
+    RowBox[{"RandomReal", "[", 
+     RowBox[{"1", ",", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "2"}], "}"}]}], "]"}]}], "//", "Transpose"}], "//", 
+  RowBox[{
+   RowBox[{"Grid", "[", 
+    RowBox[{"#", ",", 
+     RowBox[{"Dividers", "\[Rule]", "Center"}]}], "]"}], "&"}]}]], "Input",
+ CellLabel->
+  "5/12/20 21:58:20 \
+In[45]:=",ExpressionUUID->"aa43a40f-27ba-4e2e-a9ef-5868d06dd226"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"1.8452910900651602`", "2.8656877283633233`", "0.6953156067261751`", 
+     "0.9111453522109828`", "4.64208005173568`", "4.785467164652966`"},
+    {"1.8452910900651602`", "2.8656877283633233`", "0.6953156067261751`", 
+     "0.9111453522109828`", "4.64208005173568`", "4.785467164652966`"}
+   },
+   AutoDelete->False,
+   GridBoxDividers->{
+    "Columns" -> {False, {True}, False}, "Rows" -> {False, {True}, False}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellLabel->
+  "5/12/20 21:58:20 \
+Out[45]=",ExpressionUUID->"2cb20678-bfab-42d6-80d8-805cec476a64"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{"LibraryFunctionUnload", "[", "func", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Remove", "[", "func", "]"}]}], "Input",
+ CellLabel->
+  "5/12/20 21:58:28 \
+In[46]:=",ExpressionUUID->"5f319905-cd48-4154-859d-9e1c04fb424c"]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{1152., 592.8},
+WindowMargins->{{Automatic, -5.399999999999864}, {
+  Automatic, -5.3999999999999995`}},
+ShowCellTags->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (March 14, 2020)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "myNoteStyle.nb"]], 
+   Cell[
+    StyleData["Input"], PageWidth :> Infinity, MenuSortingValue -> 10000]}, 
+  Visible -> False, FrontEndVersion -> 
+  "12.1 for Microsoft Windows (64-bit) (March 14, 2020)", StyleDefinitions -> 
+  "PrivateStylesheetFormatting.nb"],
+ExpressionUUID->"0cf926ab-063c-457c-b603-eef948f7bbf4"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "LTemplate-demo-src"->{
+  Cell[44105, 1135, 564, 22, 329, "Program",ExpressionUUID->"57984d4c-9e1b-4bfc-ab70-8f2a0892697d",
+   CellTags->"LTemplate-demo-src"]},
+ "wll-demo-src"->{
+  Cell[38608, 994, 280, 11, 164, "Program",ExpressionUUID->"28a85604-2bc3-45c2-90bd-b11dd43998fb",
+   CellTags->"wll-demo-src"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"LTemplate-demo-src", 139316, 2991},
+ {"wll-demo-src", 139472, 2994}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 239, 7, 57, "InitializationCell",ExpressionUUID->"73654024-6bf4-474d-a8ed-cfd4a34270fd"],
+Cell[800, 29, 481, 14, 75, "InitializationCell",ExpressionUUID->"64f2032d-2257-406d-be4a-e67ddd076aa0"],
+Cell[1284, 45, 782, 20, 127, "InitializationCell",ExpressionUUID->"3cfb02b0-c687-499c-acd3-231b16d7d474"],
+Cell[CellGroupData[{
+Cell[2091, 69, 78, 0, 69, "Chapter",ExpressionUUID->"57deb468-cda9-4bde-b2f2-2d9ff81070de"],
+Cell[CellGroupData[{
+Cell[2194, 73, 4922, 120, 733, "Input",ExpressionUUID->"52765244-645c-498e-b505-0fb7d8440efc"],
+Cell[CellGroupData[{
+Cell[7141, 197, 704, 22, 37, "Echo",ExpressionUUID->"e3721684-c0b3-4aa7-95c3-b67a86216f62"],
+Cell[7848, 221, 623, 20, 37, "Echo",ExpressionUUID->"57d1a96c-86a0-4619-a0a7-37002d735407"],
+Cell[8474, 243, 649, 20, 37, "Echo",ExpressionUUID->"b602af14-94f5-4fd8-aa15-bc90a1826f8b"],
+Cell[9126, 265, 778, 20, 97, "Echo",ExpressionUUID->"f3663dfa-eb8c-41ed-a1bc-c69c63e75c0b"]
+}, Open  ]],
+Cell[9919, 288, 135, 3, 33, "Output",ExpressionUUID->"80966364-5c9b-490d-a4a0-70d8201a16db"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10103, 297, 85, 0, 58, "Chapter",ExpressionUUID->"e9c318d5-87fc-416d-a460-dc221cf38ef5"],
+Cell[10191, 299, 197, 5, 57, "InitializationCell",ExpressionUUID->"3bac92d4-f201-486d-83e3-25cf96f1a557"],
+Cell[CellGroupData[{
+Cell[10413, 308, 103, 0, 47, "Subsubsection",ExpressionUUID->"de4657a8-f2b5-4274-a541-f225beb5e255"],
+Cell[10519, 310, 148, 4, 52, "Comment",ExpressionUUID->"3957be75-6c77-47d1-9ba9-ff0d4e069406"],
+Cell[10670, 316, 140, 3, 35, "tempInput",ExpressionUUID->"6f7eca13-7cd9-4d47-ab27-05714e2a1075"],
+Cell[10813, 321, 2902, 74, 265, "Input",ExpressionUUID->"072613de-1830-49d7-ae89-78163dfe91ec"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[13752, 400, 127, 0, 41, "Subsubsection",ExpressionUUID->"fa10438c-f68b-435b-9233-de48363284bb"],
+Cell[13882, 402, 150, 2, 34, "Text",ExpressionUUID->"872528fc-ae01-41ea-aff7-21862e4b0632"],
+Cell[CellGroupData[{
+Cell[14057, 408, 359, 9, 49, "Input",ExpressionUUID->"abcbce66-24fe-4b02-b3a2-37d76ed88b52"],
+Cell[14419, 419, 1493, 30, 48, "Output",ExpressionUUID->"c8cabda8-9e05-43e9-b8db-7ee0513819e3"],
+Cell[15915, 451, 220, 4, 33, "Output",ExpressionUUID->"1f83c4ae-81a7-42c6-a84d-7b92922d7211"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16172, 460, 532, 13, 89, "Input",ExpressionUUID->"6ff22cba-0cf9-43d2-bd9c-2c9a014e283f"],
+Cell[16707, 475, 1451, 29, 48, "Output",ExpressionUUID->"e052298b-44f0-43f8-8fba-c8d1d7929749"],
+Cell[18161, 506, 220, 4, 33, "Output",ExpressionUUID->"49cc9423-33f5-48f7-8686-a7889f8df02e"]
+}, Open  ]],
+Cell[18396, 513, 171, 4, 34, "Text",ExpressionUUID->"2f604d2f-046a-4d2f-ba7f-76b108b2360d"],
+Cell[CellGroupData[{
+Cell[18592, 521, 443, 10, 88, "tempInput",ExpressionUUID->"b13b6944-696d-4d3e-9fc3-a27a417853ef"],
+Cell[19038, 533, 382, 9, 33, "Output",ExpressionUUID->"58b583d8-a07b-4a3e-9bb7-ce41630834ea"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19457, 547, 285, 8, 35, "tempInput",ExpressionUUID->"df1b1821-d49c-4705-9f24-1385dc1b5f5a"],
+Cell[19745, 557, 563, 13, 69, "Output",ExpressionUUID->"ddca59c2-5d26-4ebf-875b-7804a04f7504"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20345, 575, 774, 21, 109, "Input",ExpressionUUID->"50f5e027-218f-4e7f-8d64-52122f62d19d"],
+Cell[21122, 598, 12491, 238, 65, "Output",ExpressionUUID->"46768394-9cca-46db-a99a-6f03eeb5e6cd"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33650, 841, 407, 12, 35, "tempInput",ExpressionUUID->"8e889a9c-a9c1-48e3-ac15-34e741dbe6ed"],
+Cell[34060, 855, 2618, 80, 121, "Output",ExpressionUUID->"3c52f36b-38dc-4fc7-8a71-ff23d6c5bb4a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36715, 940, 517, 16, 49, "Input",ExpressionUUID->"e10405ce-30f7-4a0d-8581-4175bcdc2659"],
+Cell[37235, 958, 649, 14, 50, "Output",ExpressionUUID->"cbf504e7-2e7d-47e8-81d0-26f7426b1122"]
+}, Open  ]],
+Cell[37899, 975, 243, 5, 70, "Input",ExpressionUUID->"43f556ba-8853-4883-9491-5ef41b703a9c"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[38179, 985, 118, 0, 41, "Subsubsection",ExpressionUUID->"ea323db1-7a17-4eae-88de-c3d05ea4ec2a"],
+Cell[38300, 987, 305, 5, 52, "Comment",ExpressionUUID->"9e264e35-1065-4223-b8b6-4be1d779cd63"],
+Cell[38608, 994, 280, 11, 164, "Program",ExpressionUUID->"28a85604-2bc3-45c2-90bd-b11dd43998fb",
+ CellTags->"wll-demo-src"],
+Cell[CellGroupData[{
+Cell[38913, 1009, 1124, 28, 206, "Input",ExpressionUUID->"991377c3-193a-4573-a985-7de15e1a5d18"],
+Cell[40040, 1039, 2162, 38, 105, "Output",ExpressionUUID->"2448491b-58fd-4101-96dd-166d2dc2a65e"],
+Cell[42205, 1079, 547, 11, 23, "Message",ExpressionUUID->"57e4eae9-6457-4bb1-9127-74ac70dae63f"],
+Cell[42755, 1092, 135, 3, 33, "Output",ExpressionUUID->"7af2ae35-0946-4dd3-8fa8-e335628bd1ee"]
+}, Open  ]],
+Cell[42905, 1098, 230, 7, 52, "Comment",ExpressionUUID->"cabb180a-f1e1-497e-b16d-e0eb8fb6b804"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[43172, 1110, 105, 0, 41, "Subsubsection",ExpressionUUID->"3b60d883-d272-434e-98a1-6ccde4d72b27"],
+Cell[43280, 1112, 284, 5, 52, "Comment",ExpressionUUID->"fd37b6ad-80fc-4c56-bd5e-ddb8afb15997"],
+Cell[CellGroupData[{
+Cell[43589, 1121, 155, 4, 49, "Input",ExpressionUUID->"45cb4d23-7d7d-4395-81b8-843a0d52abc9"],
+Cell[43747, 1127, 343, 5, 75, "Print",ExpressionUUID->"8dd00626-1021-4d4d-82b1-47568c2f4f4d"]
+}, Open  ]],
+Cell[44105, 1135, 564, 22, 329, "Program",ExpressionUUID->"57984d4c-9e1b-4bfc-ab70-8f2a0892697d",
+ CellTags->"LTemplate-demo-src"],
+Cell[CellGroupData[{
+Cell[44694, 1161, 630, 16, 109, "Input",ExpressionUUID->"fa527f31-71fc-4bbd-8d80-a7db323e47fe"],
+Cell[45327, 1179, 142, 3, 33, "Output",ExpressionUUID->"d7a0bd66-0208-4530-848e-ca98ac5dcc97"]
+}, Open  ]],
+Cell[45484, 1185, 1369, 30, 253, "Input",ExpressionUUID->"cb443233-1c9c-46c8-97c6-0719176673fe"],
+Cell[CellGroupData[{
+Cell[46878, 1219, 175, 4, 35, "tempInput",ExpressionUUID->"cccd5dda-0e29-4477-b085-3d895f45fe74"],
+Cell[47056, 1225, 243, 4, 112, "Output",ExpressionUUID->"f57e738c-18f3-4636-9940-ded659c463d4"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[47336, 1234, 1445, 24, 49, "Input",ExpressionUUID->"ada5ad12-fe2e-4a80-a19b-02f0e56179c2"],
+Cell[48784, 1260, 1446, 24, 33, "Output",ExpressionUUID->"f17722cb-7b14-4a8a-82e3-947fdc4df900"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50267, 1289, 246, 6, 49, "Input",ExpressionUUID->"82278874-0528-439a-8261-e4ca6bab1c43"],
+Cell[CellGroupData[{
+Cell[50538, 1299, 1140, 37, 39, "Print",ExpressionUUID->"16a79e3c-f517-4946-aabb-886a4a138fad"],
+Cell[51681, 1338, 1489, 52, 39, "Print",ExpressionUUID->"b37ab962-3d8c-46d1-b14f-a1dfef3cd978"],
+Cell[53173, 1392, 481, 15, 39, "Print",ExpressionUUID->"51a5dde6-a199-42f6-bd72-ad32169d6f2e"],
+Cell[53657, 1409, 1140, 37, 39, "Print",ExpressionUUID->"6482e874-c9a6-4e67-8d88-4739830b4355"],
+Cell[54800, 1448, 480, 15, 39, "Print",ExpressionUUID->"0aef1518-d2cd-4d88-b51b-7476b2f63e8a"]
+}, Open  ]],
+Cell[55295, 1466, 52189, 758, 1976, "Output",ExpressionUUID->"4d981ae2-f132-447e-b4ba-daab0fc95e84"],
+Cell[107487, 2226, 738, 14, 42, "Message",ExpressionUUID->"ecceaaf9-b825-43b1-bd6b-a783e96b9345"],
+Cell[108228, 2242, 738, 14, 42, "Message",ExpressionUUID->"b325f4c9-278e-41c7-b961-2cd137b2dcd0"],
+Cell[108969, 2258, 723, 14, 42, "Message",ExpressionUUID->"4ab4bf11-1057-49d5-9ff5-fa3d4a47caf1"],
+Cell[109695, 2274, 434, 9, 23, "Message",ExpressionUUID->"8909b8a8-effa-4681-b0fc-c0842cfa17bf"],
+Cell[110132, 2285, 135, 3, 33, "Output",ExpressionUUID->"44fd1000-d953-4d6f-b214-27e7a5f5eb7a"]
+}, Open  ]],
+Cell[110282, 2291, 163, 4, 35, "tempInput",ExpressionUUID->"159e130a-097e-4822-8fd8-909085ee628f"],
+Cell[CellGroupData[{
+Cell[110470, 2299, 1081, 25, 194, "Input",ExpressionUUID->"c93e1339-434b-4c0e-9096-904c02b2df5d"],
+Cell[111554, 2326, 2162, 38, 105, "Output",ExpressionUUID->"fbbabf79-0189-48a9-abac-8d20911c07c4"],
+Cell[113719, 2366, 547, 11, 23, "Message",ExpressionUUID->"9d2f806a-29e1-40c1-af3f-18eea11aee36"],
+Cell[114269, 2379, 135, 3, 33, "Output",ExpressionUUID->"a6fd6e68-b7c1-40aa-ae0a-ceedb7148fc8"]
+}, Open  ]],
+Cell[114419, 2385, 230, 7, 52, "Comment",ExpressionUUID->"c88ba5e1-89e6-4bcf-8938-d999f02f9a6b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[114686, 2397, 108, 0, 47, "Subsubsection",ExpressionUUID->"829e7fda-9131-46b5-947a-875b21bcf298"],
+Cell[CellGroupData[{
+Cell[114819, 2401, 396, 10, 88, "tempInput",ExpressionUUID->"acac9daa-67e7-4e36-857d-8d8828b4e63b"],
+Cell[115218, 2413, 382, 9, 33, "Output",ExpressionUUID->"4a21df03-f90d-439d-8262-f737bac01a39"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[115637, 2427, 535, 12, 148, "Input",ExpressionUUID->"9043e9b3-1752-4105-85df-9f8b4b953bb9"],
+Cell[116175, 2441, 1811, 35, 82, "Output",ExpressionUUID->"43c907db-55cd-4784-a737-d766bcd148c0"],
+Cell[117989, 2478, 648, 13, 23, "Message",ExpressionUUID->"ebb23cf7-d1c6-484a-bc79-33d49d7efe33"],
+Cell[118640, 2493, 135, 3, 33, "Output",ExpressionUUID->"19ab7079-9863-46f0-b8cd-b4db31dde4d1"]
+}, Open  ]],
+Cell[118790, 2499, 171, 4, 34, "Text",ExpressionUUID->"689ebfa5-18fe-4096-819b-c11cd140ffa4"],
+Cell[CellGroupData[{
+Cell[118986, 2507, 443, 10, 88, "tempInput",ExpressionUUID->"83896301-6490-4601-96e5-893c3b6d19c8"],
+Cell[119432, 2519, 382, 9, 33, "Output",ExpressionUUID->"f2a35625-3c2e-454a-bccb-1493d90e7178"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[119851, 2533, 285, 8, 35, "tempInput",ExpressionUUID->"0b61488b-6aa0-48f7-9383-8dbbeb644358"],
+Cell[120139, 2543, 563, 13, 69, "Output",ExpressionUUID->"f3ffdd02-8ba5-4a1e-b272-60269c8bdf8d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[120739, 2561, 774, 21, 109, "Input",ExpressionUUID->"920ec482-be14-43ec-a0c2-54a7535d111c"],
+Cell[121516, 2584, 12491, 238, 65, "Output",ExpressionUUID->"4ba7af10-2003-460d-9f4a-9622fb6c0b52"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[134044, 2827, 407, 12, 35, "tempInput",ExpressionUUID->"d49e2623-14d8-42b3-953c-ddfa1066ff1e"],
+Cell[134454, 2841, 2618, 80, 121, "Output",ExpressionUUID->"d9b32560-d816-4f66-865f-d22bf771a399"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[137109, 2926, 517, 16, 49, "Input",ExpressionUUID->"aa43a40f-27ba-4e2e-a9ef-5868d06dd226"],
+Cell[137629, 2944, 649, 14, 50, "Output",ExpressionUUID->"2cb20678-bfab-42d6-80d8-805cec476a64"]
+}, Open  ]],
+Cell[138293, 2961, 243, 5, 70, "Input",ExpressionUUID->"5f319905-cd48-4154-859d-9e1c04fb424c"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+

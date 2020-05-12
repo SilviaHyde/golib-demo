@@ -1,0 +1,7 @@
+LIBRARY liblink_Division_gcc.dll
+
+EXPORTS
+Division
+WolframLibrary_getVersion
+WolframLibrary_initialize
+WolframLibrary_uninitialize
