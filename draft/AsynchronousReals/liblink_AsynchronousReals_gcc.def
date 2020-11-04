@@ -1,0 +1,7 @@
+LIBRARY liblink_AsynchronousReals_gcc.dll
+
+EXPORTS
+WolframLibrary_getVersion
+WolframLibrary_initialize
+WolframLibrary_uninitialize
+start_background_task

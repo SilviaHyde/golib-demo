@@ -1,0 +1,8 @@
+LIBRARY liblink_Addition_gcc.dll
+
+EXPORTS
+Addition
+MMinus
+WolframLibrary_getVersion
+WolframLibrary_initialize
+WolframLibrary_uninitialize

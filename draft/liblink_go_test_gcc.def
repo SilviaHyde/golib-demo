@@ -1,0 +1,7 @@
+LIBRARY liblink_go_test_gcc.dll
+
+EXPORTS
+MMinus
+WolframLibrary_getVersion
+WolframLibrary_initialize
+WolframLibrary_uninitialize

@@ -2,7 +2,9 @@
 /*  https://github.com/szhorvat/LTemplate  */
 
 #define LTEMPLATE_MMA_VERSION  1210
+#define MLINTERFACE  3
 
+#include "_mingw.h"
 #include "LTemplate.h"
 #include "LTemplateHelpers.h"
 #include "Demo1.h"

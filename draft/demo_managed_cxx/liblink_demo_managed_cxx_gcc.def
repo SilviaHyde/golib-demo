@@ -1,0 +1,12 @@
+LIBRARY liblink_demo_managed_cxx_gcc.dll
+
+EXPORTS
+WolframLibrary_getVersion
+WolframLibrary_initialize
+WolframLibrary_uninitialize
+_Z15manage_instanceP21st_WolframLibraryDataix
+generateFromInstance
+getAllInstanceIDs
+getInstanceState
+releaseInstance
+setInstanceState
